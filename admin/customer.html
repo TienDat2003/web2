@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="../asset/themify-icons/themify-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/fonts/remixicon.css">
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <title>Document</title>
+</head>
+<body style="overflow-x: hidden;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 min-vh-100 bg-dark min-vh-100">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed">
+                    <span class="fs-5 d-none d-sm-inline">Xin chào Minh</span>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="admin.html" class="nav-link align-middle px-0">
+                                <i class="ri-home-fill"></i> <span class="ms-1 d-none d-sm-inline">Trang chủ</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./donhang.html" class="nav-link px-0 align-middle">
+                                <i class="ri-file-list-3-fill"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./addProduct.html" class="nav-link px-0"><i class="ri-add-line"></i> <span class="d-none d-sm-inline">Thêm sản phẩm</span> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./productList.html" class="nav-link px-0"><i class="ri-list-settings-line"></i> <span class="d-none d-sm-inline">Danh sách sản phẩm</span> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./customer.html" class="px-0 align-middle">
+                                <i class="ri-file-user-line"></i> <span class="ms-1 d-none d-sm-inline">Khách hàng</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="../index.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <i class="ri-logout-box-line"></i><h3 class="fs-5 d-none d-sm-inline">Đăng xuất</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col py-3" id="product-list">
+                <div class="row">
+                    <h1 id="header">Số lượng khách hàng : </h1>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-2" style="text-align:center;">
+                        <h4>Tên Đăng Nhập</h4>
+                    </div>
+                    <div class="col-4" style="text-align:center;">
+                        <h4> Email</h4>
+                     </div>
+                    <div class="col-1" style="text-align:center;">
+                       <h4> Mật khẩu</h4>
+                    </div>
+                    <div class="col-2" style="text-align:center;">
+                        <h4>Địa chỉ giao hàng</h4>
+                    </div>
+                    <div class="col-2" style="text-align:center;">
+                        <h4>Số điện thoại</h4>
+                    </div>
+                    <div class="col-1" style="text-align:center;">
+                        <h4>Chức năng</h4>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="modal" id="myModal-edit">
+        <div class="modal-dialog d-flex" style="min-width: 100%;">
+            <div class="container">
+            <div class="modal-content" style="width:60%;">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="col-auto col-md-3 col-xl-3 px-sm-6 px-2"  style="margin-left: 15em;">
+                        
+                        <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2">            
+                            <form style="width: 40rem;">
+                            
+                            <div class="row mb-3">
+                                <label for="inputName" class="col-sm-3 col-form-label">Tên đăng nhập:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputName" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputParValue" class="col-sm-3 col-form-label">Email:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputParValue">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputPrice" class="col-sm-3 col-form-label">Mật khẩu:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputPrice">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputNumber" class="col-sm-3 col-form-label">Địa chỉ giao hàng:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputNumber">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputNXB" class="col-sm-3 col-form-label">Số điện thoại:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="inputNXB">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-9"></div>
+                                <div class="col-3">
+                                    <button type="button" class="btn btn-primary" id="btn-confirm">Xác nhận</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                    
+                </div>
+            </div> 
+        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="modal" id="myModal-delete" style="margin-top: 15%;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 id="header-name"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <span id="modal-text">
+                                    Xác nhận khóa tài khoản?
+                                </span>
+                                <br>
+            
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger confirm-button-1" data-bs-dismiss="modal">Xác nhận</button>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+    <script src="./customer.js"></script>
+</body>
+</html>

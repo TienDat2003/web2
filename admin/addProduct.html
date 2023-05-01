@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/fonts/remixicon.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="../asset/themify-icons/themify-icons.css" rel="stylesheet">
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <link rel="stylesheet" href="../asset/fonts/remixicon.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark min-vh-100">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white position-fixed min-vh-100">
+                    <span class="fs-5 d-none d-sm-inline">Xin chào Minh</span>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="admin.html" class="nav-link align-middle px-0">
+                                <i class="ri-home-fill"></i> <span class="ms-1 d-none d-sm-inline">Trang chủ</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./donhang.html" class="nav-link px-0 align-middle">
+                                <i class="ri-file-list-3-fill"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./addProduct.html" class="nav-link px-0"><i class="ri-add-line"></i> <span class="d-none d-sm-inline">Thêm sản phẩm</span> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./productList.html" class="nav-link px-0"><i class="ri-list-settings-line"></i> <span class="d-none d-sm-inline">Danh sách sản phẩm</span> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./customer.html" class="px-0 align-middle">
+                                <i class="ri-file-user-line"></i> <span class="ms-1 d-none d-sm-inline">Khách hàng</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="../index.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <i class="ri-logout-box-line"></i><h3 class="fs-5 d-none d-sm-inline">Đăng xuất</h3>
+                        </a>
+                    </div>
+                </div>
+                </div>
+                <div class="col-auto col-md-3 col-xl-3 px-sm-6 px-2 min-vh-100">
+                    <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 position-fixed min-vh-100">            
+                    <form style="width: 40rem;">
+                        <div class="row mb-3">
+                            <label for="inputImg" class="col-sm-3 col-form-label">Chọn ảnh</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="img-upload" name="img" accept="image/png">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputName" class="col-sm-3 col-form-label">Tên sách:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputName">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputParValue" class="col-sm-3 col-form-label">Giá bìa:</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="inputParValue">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPrice" class="col-sm-3 col-form-label">Giá bán:</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="inputPrice">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPrice" class="col-sm-3 col-form-label">Số lượng:</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="inputNumber">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPrice" class="col-sm-3 col-form-label">NXB:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputNXB">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPrice" class="col-sm-3 col-form-label">Tác giả:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputAuthor">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPrice" class="col-sm-3 col-form-label">Mô tả</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="inputContent" style="height: 90px;"></textarea>
+                            </div>
+                        </div>
+                        <fieldset class="row mb-3">
+                        <legend class="col-form-label col-sm-3 pt-0">Thể loại:</legend>
+                        <div class="col-sm-9">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Tiểu thuyết">
+                            <label class="form-check-label" for="gridRadios1">
+                                Tiểu thuyết
+                            </label>
+                        </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Tâm lý">
+                                <label class="form-check-label" for="gridRadios2">
+                                    Tâm lý
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Kinh dị - Giả tưởng">
+                                <label class="form-check-label" for="gridRadios3">
+                                    Kinh dị - Giả tưởng
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="Tản văn - Tạp văn">
+                                <label class="form-check-label" for="gridRadios4">
+                                    Tản văn - Tạp văn
+                                </label>
+                            </div>
+                        <button type="button" class="btn btn-danger" id="btn-check">Kiểm tra</button>
+                        <button type="button" class="btn btn-primary" id="btn-confirm">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+            <div class="container-fluid" id="product">
+                
+            </div>
+        </div> 
+    </div>
+    <div class="modal" id="myModal" style="margin-top: 30px;">
+        <div class="modal-dialog modal-xl" >
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" id="modal-content">
+                    
+                            <!-- <div class="col-1">
+
+                            </div> -->
+
+                            
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+            </div>
+        </div>
+    </div>
+
+    <script src="./addProduct.js"></script>
+</body>
+</html>

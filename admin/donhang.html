@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="../asset/themify-icons/themify-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/fonts/remixicon.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark min-vh-100">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white position-fixed  min-vh-100">
+                    <span class="fs-5 d-none d-sm-inline">Xin chào Minh</span>
+
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="admin.html" class="nav-link align-middle px-0">
+                                <i class="ri-home-fill"></i> <span class="ms-1 d-none d-sm-inline">Trang chủ</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./donhang.html" class="nav-link px-0 align-middle">
+                                <i class="ri-file-list-3-fill"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./addProduct.html" class="nav-link px-0"><i class="ri-add-line"></i> <span class="d-none d-sm-inline">Thêm sản phẩm</span> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./productList.html" class="nav-link px-0"><i class="ri-list-settings-line"></i> <span class="d-none d-sm-inline">Danh sách sản phẩm</span> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./customer.html" class="px-0 align-middle">
+                                <i class="ri-file-user-line"></i> <span class="ms-1 d-none d-sm-inline">Khách hàng</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="../index.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <i class="ri-logout-box-line"></i><h3 class="fs-5 d-none d-sm-inline">Đăng xuất</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="box container py-5" style="width:1000px;text-align: center; border-collapse: separate; border-radius: 15px;">
+                <div class="row">
+                    <div class="col-2">
+                        <h3 style="text-align: left;">Từ ngày:</h3>
+                    </div>
+                    <div class="col-2">
+                        <input type="date" name="bday" value="2022-06-05">
+                    </div>
+                    <div class="col-2">
+                        <h3>Đến ngày:</h3>
+                    </div>
+                    <div class="col-4">
+                        <input type="date" value="2022-12-05">
+                        <input type="submit" value="Xác nhận">
+                    </div>
+                </div>
+                <br>
+                <div class="container " style="text-align: center;">
+                    <div class="row">
+                        <div class="col-3">
+                            <h2 id="count-order"></h2>
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1"  style="margin-left: 2em;">
+                            <h5> Trạng thái</h5>
+                        </div>
+                        <div class="col-2" style="margin-left: 3em;">
+                            <h5>Tên khách hàng</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5>Địa chỉ giao hàng</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5>Số điện thoại</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5>Chi tiết</h5>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="order-list">
+                        
+                    </div>
+                </div>
+                
+                <!-- <div class="total-price" style="width:650px">
+                    <h5 style="margin-left: 630px;width: 100px;margin: right 0px;">Total:</h5>
+                </div> -->
+            </div>
+            <div class="modal" id="myModal-edit" style="margin-top: 5%;">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Chi tiết đơn hàng</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body" id="modal-order">
+                            
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger confirm-button" data-bs-dismiss="modal">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+             </div>
+    <script src="./donhang.js"></script>
+</body>
+</html>

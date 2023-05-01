@@ -1,0 +1,138 @@
+
+body {
+    margin: 0;
+    background-image: url('../image/backgoundimg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#min-find{
+    width: 87px;
+}
+
+#max-find{
+    width: 87px;
+}
+
+.menu-item {
+    padding: 10px 15px;
+    display: block;
+    font-size: 14px;
+    padding: 5px;
+    border: 1px black;
+    box-sizing: border-box;
+}
+.menu-item :hover{
+   
+    background-color: pink;
+    color: black;
+}
+
+a {
+    text-decoration: none !important;
+}
+a, a:hover, a:visited, a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+
+#body-login{
+    width: 100%;
+    height: 100%;
+    display: table;
+    text-align: center;
+
+
+}
+#login{
+    display: table-cell;
+    vertical-align: middle;
+}
+#login-footer{
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
+}
+
+/* #body-login {
+    overflow: hidden; Hide scrollbars
+} */
+
+.carousel .carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+.disappear {
+    display: none;
+}
+
+/* cart */
+.products-container{
+    max-width: 650px;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.products-container ion-icon {
+    font-size: 25px;
+    color: blue;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.products-header {
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 4px solid lightgrey;
+    margin: 0 auto;
+}
+.product-title {
+    width: 45%;
+}
+.price {
+    width: 15%;
+    display: flex;
+    align-items: center;
+}
+.quantity {
+    width: 30%;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+}
+.total {
+    width: 20%;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+}
+
+.product {
+    width: 70%;
+    /* display: flex; */
+    /* justify-content:space-around;
+    align-items:center; */
+    padding: 10px 0;
+    border-bottom:1px solid lightgrey;
+}
+
+.card-img-top {
+    height: 350px;
+    box-sizing: border-box;
+}
+.small-middle-container{ 
+    max-width: 600px; margin: auto;
+} 
+.small-box-middle-container{ 
+    max-width: 800px; margin: auto;
+} 
+
+
+
