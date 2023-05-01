@@ -3,53 +3,53 @@ const product=JSON.parse(json)
 const newProduct=document.getElementById('product')
 let header=document.getElementById('header')
 header.innerHTML+=product.length;
-let productList=document.getElementById('product-list')
-let code=[]
-for (let i=0;i<product.length;i++)
-    if (product[i].code.indexOf(".")==0)
-        code.push("."+ product[i].code)
-    else
-        code.push(product[i].code)
+// let productList=document.getElementById('product-list')
+// let code=[]
+// for (let i=0;i<product.length;i++)
+//     if (product[i].code.indexOf(".")==0)
+//         code.push("."+ product[i].code)
+//     else
+//         code.push(product[i].code)
 
-for (let i=0;i<product.length;i++){
-    productList.innerHTML+=`
-    <hr>
-    <div class="row" id="row-${i+1}">
-        <div class="col-1" style="text-align:center;">
-            <h5>${i+1}</h5>
-        </div>
-        <div class="col-2">
-            <h5>${product[i].name}</h5>
-        </div>
-        <div class="col-1">
-            <img class="card-img-top" style="width:100%;height:100%;" src="${code[i]}" alt="Book image">
-        </div>
-        <div class="col-2">
-            <h5 style="text-align:center;">${product[i].type}</h5>
-            </div>
-        <div class="col-1">
-            <h5> ${parseInt(product[i].realValue).toLocaleString()}</h5>
-        </div>
-        <div class="col-1">
-            <h5>${parseInt(product[i].cost).toLocaleString()}</h5>
-        </div>
-        <div class="col-1">
-            <h5>${product[i].NXB}</h5>
-        </div>
-        <div class="col-1">
-            <h5>${product[i].author}</h5>
-        </div>
-        <div class="col-1" style="text-align:center;">
-            <h5>${product[i].number}</h5>
-        </div>
-        <div class="col-1">
-            <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal-edit"><i class="ri-edit-2-line"></i></button>
-            <button type="button" class="btn btn-outline-danger btn-delete" data-bs-toggle="modal" data-bs-target="#myModal-delete"><i class="ri-delete-bin-6-line"></i></button>
-        </div>   
-    </div>
+// for (let i=0;i<product.length;i++){
+//     productList.innerHTML+=`
+//     <hr>
+//     <div class="row" id="row-${i+1}">
+//         <div class="col-1" style="text-align:center;">
+//             <h5>${i+1}</h5>
+//         </div>
+//         <div class="col-2">
+//             <h5>${product[i].name}</h5>
+//         </div>
+//         <div class="col-1">
+//             <img class="card-img-top" style="width:100%;height:100%;" src="${code[i]}" alt="Book image">
+//         </div>
+//         <div class="col-2">
+//             <h5 style="text-align:center;">${product[i].type}</h5>
+//             </div>
+//         <div class="col-1">
+//             <h5> ${parseInt(product[i].realValue).toLocaleString()}</h5>
+//         </div>
+//         <div class="col-1">
+//             <h5>${parseInt(product[i].cost).toLocaleString()}</h5>
+//         </div>
+//         <div class="col-1">
+//             <h5>${product[i].NXB}</h5>
+//         </div>
+//         <div class="col-1">
+//             <h5>${product[i].author}</h5>
+//         </div>
+//         <div class="col-1" style="text-align:center;">
+//             <h5>${product[i].number}</h5>
+//         </div>
+//         <div class="col-1">
+//             <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal-edit"><i class="ri-edit-2-line"></i></button>
+//             <button type="button" class="btn btn-outline-danger btn-delete" data-bs-toggle="modal" data-bs-target="#myModal-delete"><i class="ri-delete-bin-6-line"></i></button>
+//         </div>   
+//     </div>
     
-    `
-}
+//     `
+// }
 
 // xóa
 let deleteBtn=document.querySelectorAll('.btn-delete')

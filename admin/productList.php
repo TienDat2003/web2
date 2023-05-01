@@ -66,7 +66,7 @@ session_start();
                         <option value="3">Kinh dị - Giả tưởng</option>
                         <option value="4">Tạp văn</option>
                     </select>
-                    <button type="submit">Submit</button>
+                    <button type="submit">Xác nhận</button>
                     </form>
 
                 </div>
@@ -117,14 +117,14 @@ session_start();
                 </div>
     <?php
         // Lấy danh sách sản phẩm và loại sản phẩm từ cơ sở dữ liệu
-        $sql = "SELECT s.masach, s.tensach, s.gia, s.soluong, s.nxb, s.tacgia, s.mota, s.trangthai, l.tenloai FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai";
+        $sql = "SELECT s.masach, s.tensach, s.gia, s.soluong, s.nxb, s.tacgia, s.mota, s.trangthai, l.tenloai FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER BY s.masach ASC";
         // kiểm tra xem form có được submit hay chưa
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // lấy giá trị của select và lưu vào biến
             $loai = $_POST['loai'];
             // xử lý dữ liệu tương ứng với giá trị lấy được
             if ($loai == 0) {
-                $sql = "SELECT s.masach, s.tensach, s.gia, s.soluong, s.nxb, s.tacgia, s.mota, s.trangthai, l.tenloai FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai";
+                $sql = "SELECT s.masach, s.tensach, s.gia, s.soluong, s.nxb, s.tacgia, s.mota, s.trangthai, l.tenloai FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER BY s.masach ASC";
             } else {
             // ...xử lý khi chọn giá trị khác 0
                 $sql = "SELECT s.masach, s.tensach, s.gia, s.soluong, s.nxb, s.tacgia, s.mota, s.trangthai, l.tenloai 
@@ -164,8 +164,8 @@ session_start();
             echo '<h5>' . $row["soluong"] . '</h5>';
             echo '</div>';
             echo '<div class="col-1">';
-            echo '<button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal-edit"><i class="ri-edit-2-line"></i></button>';
-            echo '<button type="button" class="btn btn-outline-danger btn-delete" data-bs-toggle="modal" data-bs-target="#myModal-delete"><i class="ri-delete-bin-6-line"></i></button>';
+            echo '<button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal-edit">Sửa</button>';
+            echo '<button type="button" class="btn btn-outline-danger btn-delete" data-bs-toggle="modal" data-bs-target="#myModal-delete">Ẩn</button>';
             echo '</div>';
             echo '</div>';
         }
@@ -184,18 +184,19 @@ session_start();
                 <!-- Modal body -->
                 <div class="modal-body">
                     <span id="modal-text">
-                        Xác nhận xóa sản phẩm
+                        Xác nhận ẩn sản phẩm
                     </span>
                     <br>
 
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger confirm-button" data-bs-dismiss="modal">Xác nhận</button>
+                    <button type="button" class="btn btn-primary no-button" data-bs-dismiss="modal">Không</button>
+                    <button type="button" class="btn btn-danger confirm-button" data-bs-dismiss="modal">Có</button>
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 
 
 <!-- modal edit -->
@@ -316,6 +317,6 @@ session_start();
                     
             </div>
         </div>
-    <!-- <script src="./productList.js"></script> -->
+    <script src="./productList.js"></script>
 </body>
 </html>
