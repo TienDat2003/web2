@@ -20,28 +20,28 @@
 
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
-                            <a href="admin.html" class="nav-link align-middle px-0">
+                            <a href="admin.php" class="nav-link align-middle px-0">
                                 <i class="ri-home-fill"></i> <span class="ms-1 d-none d-sm-inline">Trang chủ</span>
                             </a>
                         </li>
                         <li>
-                            <a href="./donhang.html" class="nav-link px-0 align-middle">
+                            <a href="./donhang.php" class="nav-link px-0 align-middle">
                                 <i class="ri-file-list-3-fill"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="./addProduct.html" class="nav-link px-0"><i class="ri-add-line"></i> <span class="d-none d-sm-inline">Thêm sản phẩm</span> </a>
+                            <a href="./addProduct.php" class="nav-link px-0"><i class="ri-add-line"></i> <span class="d-none d-sm-inline">Thêm sản phẩm</span> </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./productList.html" class="nav-link px-0"><i class="ri-list-settings-line"></i> <span class="d-none d-sm-inline">Danh sách sản phẩm</span> </a>
+                            <a href="./productList.php" class="nav-link px-0"><i class="ri-list-settings-line"></i> <span class="d-none d-sm-inline">Danh sách sản phẩm</span> </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./customer.html" class="px-0 align-middle">
+                            <a href="./customer.php" class="px-0 align-middle">
                                 <i class="ri-file-user-line"></i> <span class="ms-1 d-none d-sm-inline">Khách hàng</span> </a>
                         </li>
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
-                        <a href="../index.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <a href="../index.php" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <i class="ri-logout-box-line"></i><h3 class="fs-5 d-none d-sm-inline">Đăng xuất</h3>
                         </a>
                     </div>

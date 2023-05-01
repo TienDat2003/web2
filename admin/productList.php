@@ -1,3 +1,10 @@
+<?php
+require '../DataProvider.php';
+
+session_start();
+// Lấy giá trị của biến session
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,28 +27,28 @@
                         <span class="fs-5 d-none d-sm-inline">Xin chào Minh</span>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
-                            <a href="admin.html" class="nav-link align-middle px-0">
+                            <a href="admin.php" class="nav-link align-middle px-0">
                                 <i class="ri-home-fill"></i> <span class="ms-1 d-none d-sm-inline">Trang chủ</span>
                             </a>
                         </li>
                         <li>
-                            <a href="./donhang.html" class="nav-link px-0 align-middle">
+                            <a href="./donhang.php" class="nav-link px-0 align-middle">
                                 <i class="ri-file-list-3-fill"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="./addProduct.html" class="nav-link px-0"><i class="ri-add-line"></i> <span class="d-none d-sm-inline">Thêm sản phẩm</span> </a>
+                            <a href="./addProduct.php" class="nav-link px-0"><i class="ri-add-line"></i> <span class="d-none d-sm-inline">Thêm sản phẩm</span> </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./productList.html" class="nav-link px-0"><i class="ri-list-settings-line"></i> <span class="d-none d-sm-inline">Danh sách sản phẩm</span> </a>
+                            <a href="./productList.php" class="nav-link px-0"><i class="ri-list-settings-line"></i> <span class="d-none d-sm-inline">Danh sách sản phẩm</span> </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./customer.html" class="px-0 align-middle">
+                            <a href="./customer.php" class="px-0 align-middle">
                                 <i class="ri-file-user-line"></i> <span class="ms-1 d-none d-sm-inline">Khách hàng</span> </a>
                         </li>
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
-                        <a href="../index.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <a href="../index.php" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <i class="ri-logout-box-line"></i><h3 class="fs-5 d-none d-sm-inline">Đăng xuất</h3>
                         </a>
                     </div>
@@ -51,22 +58,32 @@
                 <div class="row">
                     <div class="col-12">
                     <h2>Chọn loại sản phẩm:</h2>
-                    <select class="form-select form-select-sm" id="select-bottom" style="width: 200px;margin-right: 14px;" aria-label=".form-select-sm example">
+                    <form method="POST">
+                    <select name="loai" class="form-select form-select-sm" id="select-bottom" style="width: 200px;margin-right: 14px;" aria-label=".form-select-sm example">
                         <option value="0" selected="selected">Tất cả</option>
                         <option value="1">Tiểu thuyết</option>
                         <option value="2">Tâm lý</option>
                         <option value="3">Kinh dị - Giả tưởng</option>
-                        <option value="4">Tạp văn-Tản văn</option>
-                        <!-- <option value="5">Dưới 100k</option>
-                        <option value="6">100k-200k</option>
-                        <option value="7">Trên 200k</option> -->
+                        <option value="4">Tạp văn</option>
                     </select>
+                    <button type="submit">Submit</button>
+                    </form>
+
                 </div>
                 </div>
                 <hr>
-                <div class="row">
-                    <h2 id="header">Số lượng sản phẩm : </h2>
-                </div>
+                <?php
+                    // Thực hiện câu truy vấn SQL để đếm số lượng bản ghi trong bảng sách
+                    $sql = "SELECT COUNT(*) as count FROM sach";
+                    $result = executeQuery($sql);
+                    $count = $result->fetch_assoc()["count"];
+
+                    // Hiển thị kết quả số lượng sản phẩm
+                    echo '<div class="row">';
+                    echo '<h2 id="header">Số lượng sản phẩm: ' . $count . '</h2>';
+                    echo '</div>';
+                ?>
+
                 <br>
                 <br>
                 <div class="row">
@@ -81,14 +98,11 @@
                     </div>
                     <div class="col-2">
                         <h4 style="text-align:center;"> Thể loại</h4>
-                     </div>
-                    <div class="col-1">
-                       <h4> Giá bìa </h4>
                     </div>
                     <div class="col-1">
-                        <h4>Giá bán </h4>
+                        <h4> Giá bìa </h4>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <h5 style="text-align:center;">NXB</h5>
                     </div>
                     <div class="col-1">
@@ -101,6 +115,62 @@
                         <h5>Chức năng</h5>
                     </div>
                 </div>
+    <?php
+        // Lấy danh sách sản phẩm và loại sản phẩm từ cơ sở dữ liệu
+        $sql = "SELECT s.masach, s.tensach, s.gia, s.soluong, s.nxb, s.tacgia, s.mota, s.trangthai, l.tenloai FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai";
+        // kiểm tra xem form có được submit hay chưa
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // lấy giá trị của select và lưu vào biến
+            $loai = $_POST['loai'];
+            // xử lý dữ liệu tương ứng với giá trị lấy được
+            if ($loai == 0) {
+                $sql = "SELECT s.masach, s.tensach, s.gia, s.soluong, s.nxb, s.tacgia, s.mota, s.trangthai, l.tenloai FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai";
+            } else {
+            // ...xử lý khi chọn giá trị khác 0
+                $sql = "SELECT s.masach, s.tensach, s.gia, s.soluong, s.nxb, s.tacgia, s.mota, s.trangthai, l.tenloai 
+                FROM sach s 
+                INNER JOIN loaisach l ON s.maloai = l.maloai
+                WHERE s.maloai = " . $loai;
+            }
+        }
+        $result = executeQuery($sql);
+        $link="../asset/image/";
+        // Duyệt qua danh sách sản phẩm và hiển thị thông tin tương ứng
+        while($row = $result->fetch_array()) {
+            echo '<hr>';
+            echo '<div class="row" id="row-' . $row["masach"] . '">';
+            echo '<div class="col-1" style="text-align:center;">';
+            echo '<h5>' . $row["masach"] . '</h5>';
+            echo '</div>';
+            echo '<div class="col-2">';
+            echo '<h5>' . $row["tensach"] . '</h5>';
+            echo '</div>';
+            echo '<div class="col-1">';
+            echo '<img class="card-img-top" style="width:100%;height:100%;" src="' . $link . $row["masach"] . '.png" alt="Book image">';
+            echo '</div>';
+            echo '<div class="col-2">';
+            echo '<h5 style="text-align:center;">' . $row["tenloai"] . '</h5>';
+            echo '</div>';
+            echo '<div class="col-1">';
+            echo '<h5>' . number_format($row["gia"]) . '</h5>';
+            echo '</div>';
+            echo '<div class="col-2">';
+            echo '<h5>' . $row["nxb"] . '</h5>';
+            echo '</div>';
+            echo '<div class="col-1">';
+            echo '<h5>' . $row["tacgia"] . '</h5>';
+            echo '</div>';
+            echo '<div class="col-1" style="text-align:center;">';
+            echo '<h5>' . $row["soluong"] . '</h5>';
+            echo '</div>';
+            echo '<div class="col-1">';
+            echo '<button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal-edit"><i class="ri-edit-2-line"></i></button>';
+            echo '<button type="button" class="btn btn-outline-danger btn-delete" data-bs-toggle="modal" data-bs-target="#myModal-delete"><i class="ri-delete-bin-6-line"></i></button>';
+            echo '</div>';
+            echo '</div>';
+        }
+    ?>
+</body>
             </div>
         </div>
     </div>
@@ -246,6 +316,6 @@
                     
             </div>
         </div>
-    <script src="./productList.js"></script>
+    <!-- <script src="./productList.js"></script> -->
 </body>
 </html>

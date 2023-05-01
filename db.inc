@@ -1,6 +1,6 @@
 <?php
 	$servername = "localhost:3306";
-   	$dbname = "webDatabase";
+   	$dbname = "csdl";
    	$username = "root";
    	$password = "";
 ?>

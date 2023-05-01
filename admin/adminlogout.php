@@ -13,7 +13,7 @@
 <body id="body-login" class="bg-dark p-3">
     <div class="vh-10">
         <div class="dropdown pb-4">
-            <a href="../index.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
+            <a href="../index.php" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
                 <i class="ri-logout-box-line"></i><h3 class="fs-5 d-none d-sm-inline" style="font-size: 26px;color: black;">Trang chủ</h3>
             </a>
         </div>
@@ -58,7 +58,7 @@
             console.log(1)
             if (document.querySelector('#form3Example3').value=='admin'&&document.querySelector('#form3Example4').value=='123'){
                 alert("Xin chào admin Minh");
-                window.location.href='./admin.html'
+                window.location.href='./admin.php'
     }
             else
                 alert('Đăng nhập thất bại')
