@@ -1,3 +1,34 @@
+<?php
+require '../DataProvider.php';
+
+session_start();
+// Lấy giá trị của biến session
+?>
+
+<?php
+	if (isset($_POST['ten']) && isset($_POST['mota']) && isset($_POST['gia']) && isset($_POST['nxb']) &&isset($_POST['tacgia']) && $_POST['ten']!=""){
+        $sql = "SELECT COUNT(*) AS numrows FROM sach";
+        $result = executeQuery($sql);
+        $row1 = $result->fetch_array();
+        $numrows = $row1['numrows']+1;
+		$tmp_name = $_FILES["image_url"]["tmp_name"];
+		$fldimageurl = "../asset/image/" . $_FILES["image_url"]["name"];
+		move_uploaded_file($tmp_name, $fldimageurl);
+		// echo($fldimageurl);
+		// echo($_FILES["image_url"]["name"]);
+		$sql = "INSERT INTO `sach`(`masach`, `tensach`, `maloai`, `gia`, `nxb`, `tacgia`, `mota`, `trangthai`, `anh`) VALUES (" .
+				"'" . $numrows . "'," . 
+				"'" . $_POST['ten'] . "'," . 
+				"'" . $_POST['gridRadios'] . "'," . 
+				"'" . $_POST['gia'] . "'," . 
+				"'" . $_POST['nxb'] . "'," . 
+				"'" . $_POST['tacgia'] . "'," . 
+				"'" . $_POST['mota'] . "'," . 
+				"'0'," . 
+				"'" . $_FILES["image_url"]["name"] ."')";
+                $result=executeQuery($sql);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,84 +91,68 @@
                 </div>
                 <div class="col-auto col-md-3 col-xl-3 px-sm-6 px-2 min-vh-100">
                     <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 position-fixed min-vh-100">            
-                    <form style="width: 40rem;">
+                    <form style="width: 40rem;" action='addProduct.php' method='post'  enctype="multipart/form-data">
                         <div class="row mb-3">
                             <label for="inputImg" class="col-sm-3 col-form-label">Chọn ảnh</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control" id="img-upload" name="img" accept="image/png">
+                                <input type="file" class="form-control" id="img-upload" name="image_url" accept="image/png">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3"></div>
+                            <div class="col-sm-3" id="image" style="margin-left: 20px;">
+                            <img id="image_1">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputName" class="col-sm-3 col-form-label">Tên sách:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="inputName">
+                                <input type="text" class="form-control" id="inputName" name="ten">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputParValue" class="col-sm-3 col-form-label">Giá bìa:</label>
+                            <label for="inputPrice" class="col-sm-3 col-form-label">Giá :</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="inputParValue">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputPrice" class="col-sm-3 col-form-label">Giá bán:</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="inputPrice">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputPrice" class="col-sm-3 col-form-label">Số lượng:</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="inputNumber">
+                                <input type="number" class="form-control" id="inputPrice" name="gia">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputPrice" class="col-sm-3 col-form-label">NXB:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="inputNXB">
+                                <input type="text" class="form-control" id="inputNXB" name="nxb">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputPrice" class="col-sm-3 col-form-label">Tác giả:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="inputAuthor">
+                                <input type="text" class="form-control" id="inputAuthor" name="tacgia">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputPrice" class="col-sm-3 col-form-label">Mô tả</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" id="inputContent" style="height: 90px;"></textarea>
+                                <textarea class="form-control" id="inputContent" style="height: 90px;" name="mota"></textarea>
                             </div>
                         </div>
                         <fieldset class="row mb-3">
                         <legend class="col-form-label col-sm-3 pt-0">Thể loại:</legend>
                         <div class="col-sm-9">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Tiểu thuyết">
-                            <label class="form-check-label" for="gridRadios1">
-                                Tiểu thuyết
-                            </label>
-                        </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Tâm lý">
-                                <label class="form-check-label" for="gridRadios2">
-                                    Tâm lý
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Kinh dị - Giả tưởng">
-                                <label class="form-check-label" for="gridRadios3">
-                                    Kinh dị - Giả tưởng
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="Tản văn - Tạp văn">
-                                <label class="form-check-label" for="gridRadios4">
-                                    Tản văn - Tạp văn
-                                </label>
-                            </div>
-                        <button type="button" class="btn btn-danger" id="btn-check">Kiểm tra</button>
-                        <button type="button" class="btn btn-primary" id="btn-confirm">Xác nhận</button>
+                        <?php
+
+$sql = "SELECT * FROM loaisach";
+$result = executeQuery($sql);
+
+while ($row = $result -> fetch_array())
+   {
+        echo '<div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="'. $row['maloai'] .'">
+        <label class="form-check-label" for="gridRadios1">
+        '. $row['tenloai'] .'
+        </label>
+    </div>';
+   }
+?>     
+                        <button type="submit" class="btn btn-primary" id="btn-confirm">Xác nhận</button>
                     </form>
                 </div>
             </div>
@@ -172,6 +187,36 @@
         </div>
     </div>
 
-    <script src="./addProduct.js"></script>
+    <script>
+        
+        const fileUpload = document.querySelector('#img-upload')
+        const inputName=document.querySelector('#inputName')
+        const inputPrice=document.querySelector('#inputPrice')
+        const inputNXB=document.querySelector('#inputNXB')
+        const inputContent=document.querySelector("#inputContent")
+        const inputAuthor=document.querySelector('#inputAuthor')
+        const gridRadios=document.getElementsByName('gridRadios')
+        const btnConfirm=document.querySelector('#btn-confirm')
+        const reader = new FileReader()
+    btnConfirm.addEventListener('click',function(){
+        if (inputName.value==''||inputParValue.value==''||inputPrice.value==''||radios=='')
+            alert('Vui lòng nhập đầy đủ thông tin')
+            location.href = "addProduct.php"
+    })
+    fileUpload.addEventListener('change', (event) => {
+    var files = event.target.files;
+    var file = files[0];
+    reader.readAsDataURL(file);
+    let img
+    var imageDiv = document.getElementById('image');
+    reader.addEventListener('load', (event) => {
+      img = document.getElementById('image_1');
+      img.src = event.target.result;
+      img.alt = file.name;
+      img.width = 150; // Đặt giá trị cho thuộc tính width
+      img.height = 150;
+    });
+  });
+    </script>
 </body>
 </html>

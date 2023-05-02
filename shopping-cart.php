@@ -1,16 +1,6 @@
 <?php
 require 'DataProvider.php';
 session_start();
-
-if (isset($_SESSION['user'])) {
-    $username = $_SESSION['user'];
-    echo '<li class="nav-item header-log-out"><a class="nav-link me-lg-3" href="./index.php" style="white-space: nowrap;"><i class="ti-user"></i> '.$username.'</a></li>';
-    echo '<li class="nav-item header-log-out"><a class="nav-link me-lg-3" id="header" href="./index.php?out=1" style="white-space: nowrap;"><i class="ri-logout-box-line"></i> Đăng xuất</a></li>';
-} 
-else {
-    // Biến session không tồn tại
-    echo '<li class="nav-item header-login"><a class="nav-link me-lg-3" id="header" href="./login.php" style="white-space: nowrap;"><i class="ri-login-box-line"></i> Đăng Nhập/Đăng Ký</a></li>';
-}
 ?>
 
 
@@ -74,10 +64,18 @@ else {
                                 <i class="ti-shopping-cart"></i> Giỏ hàng
                             </a>
                         </li>
-                        <li class="nav-item header-user-name disappear"></li>
-                        <li class="nav-item header-log-out disappear"><a class="nav-link me-lg-3" href="./index.php"><i class="ri-login-box-line"></i> Đăng xuất</a></li>
-                        <!-- <li class="nav-item header-account"><a class="nav-link me-lg-3" href="./Register.php"><i class="ri-edit-2-line"></i> Đăng Ký</a></li> -->
-                        <li class="nav-item header-login"><a class="nav-link me-lg-3" href="./login.php"><i class="ri-login-box-line"></i> Đăng Nhập/Đăng Ký</a></li>
+<?php
+
+if (isset($_SESSION['user'])) {
+    $username = $_SESSION['user'];
+    echo '<li class="nav-item header-log-out"><a class="nav-link me-lg-3" href="./index.php" style="white-space: nowrap;"><i class="ti-user"></i> '.$username.'</a></li>';
+    echo '<li class="nav-item header-log-out"><a class="nav-link me-lg-3" id="header_1" href="./index.php?out=1" style="white-space: nowrap;"><i class="ri-logout-box-line"></i> Đăng xuất</a></li>';
+} 
+else {
+    // Biến session không tồn tại
+    echo '<li class="nav-item header-login"><a class="nav-link me-lg-3" id="header_1" href="./login.php" style="white-space: nowrap;"><i class="ri-login-box-line"></i> Đăng Nhập/Đăng Ký</a></li>';
+}
+?>
                     </ul>
                 </div>
             </div>
@@ -140,13 +138,13 @@ if (isset($_SESSION['cart'])){
                     <button class="navbar-toggler plus" type="button" style="margin-left:20px;"><i class="ti-plus text-primary"></i></button>
                 </div>
                 <div class="col-3 d-flex justify-content-end">
-                    <h5 class="sum-cart" id="sum_cart_'.$i.'">'. $row['gia']/1000*$quantity .'.000đ</h5>
+                    <h5 class="sum_cart" id="sum_cart_'.$i.'">'. $row['gia']/1000*$quantity .'.000đ</h5>
                 </div>
                 
             </div>
         </div> 
         ';
-        $sum = $row['gia']*$quantity;
+        $sum =$sum + $row['gia']*$quantity;
         $i=$i+1;
     }   
 }   
@@ -315,7 +313,11 @@ if (isset($_SESSION['cart'])){
                 let total = document.getElementById("total-price")
                 if (parseInt(cart.innerText)>1){
                     sum.innerText = (parseInt(sum.innerText)/parseInt(cart.innerText))*(parseInt(cart.innerText)-1)+".000đ"
-                    total.innerText = parseInt(total.innerText)+(parseInt(sum.innerText)/parseInt(cart.innerText))+".000đ"
+                    let sumcart = document.getElementsByClassName("sum_cart")
+                    let t=0;
+                    for (let i=0;i<sumcart.length;i++)
+                        t = t + parseInt(sumcart[i].innerText)
+                    total.innerText = t+".000đ"
                     cart.innerText = parseInt(cart.innerText)-1
                 }
             })
@@ -326,15 +328,19 @@ if (isset($_SESSION['cart'])){
                 let sum = document.getElementById("sum_cart_"+i)
                 let total = document.getElementById("total-price")
                 let cart = document.getElementById("add_cart_"+i)
-                total.innerText = parseInt(total.innerText)+(parseInt(sum.innerText)/parseInt(cart.innerText))+".000đ"
                 sum.innerText = (parseInt(sum.innerText)/parseInt(cart.innerText))*(parseInt(cart.innerText)+1)+".000đ"
+                let sumcart = document.getElementsByClassName("sum_cart")
+                let t=0;
+                for (let i=0;i<sumcart.length;i++)
+                    t = t + parseInt(sumcart[i].innerText)
+                total.innerText = t+".000đ"
                 cart.innerText = parseInt(cart.innerText)+1
             })
         }
-        let payButton=document.querySelector("pay_button")
-        let header = document.getElementById("header")
+        let payButton=document.querySelector("#pay_button")
+        let header = document.getElementById("header_1")
         payButton.addEventListener('click',function(){
-                if (header.innerText=="Đăng xuất"){
+                if (header.innerText!="Đăng xuất"){
                     alert("Đăng nhập để thanh toán")
                     location.href = "login.php"
                 }

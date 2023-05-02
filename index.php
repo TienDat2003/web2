@@ -155,8 +155,8 @@ while ($row = $result -> fetch_array())
                 <div class="d-flex justify-content-center row" id="card-list">
                     <h2 class="text-center mt-3 pt-3" id="list-item-1">Danh sách sản phẩm</h2> ';
 $per_page = 9;//số lượng sản phẩm 1 trangx
-$sql = "SELECT * FROM sach WHERE 1";
-$sql1 = " WHERE 1";
+$sql = "SELECT * FROM sach WHERE `trangthai`!=-1";
+$sql1 = " AND `trangthai`!=-1";
 $temp=0;
 $name="";
 if (isset($_GET['theloai']))
@@ -211,7 +211,7 @@ while ($row = $result -> fetch_array()) {
         echo '<div class="col-lg-3 m-5">
         <div class="card">
             <button class="m-0 p-0 btn btn-primary btn-modal" style="border: none;background: none;" type="button" data-bs-toggle="modal" data-bs-target="#myModal-'. $row['masach'].'">
-                <img class="card-img-top" src="./asset/image/'. $row['masach'].'.png" alt="Card image">
+                <img class="card-img-top" src="./asset/image/'. $row['anh'].'" alt="Card image">
             </button>
             <div class="card-body" >
                 <h4 class="card-title" style="margin-bottom:20px;height:59px;">'. $row['tensach'] .'</h4>
@@ -230,7 +230,7 @@ while ($row = $result -> fetch_array()) {
 echo '
                 </div>
             </div>';
-$sql = "SELECT COUNT(*) AS numrows FROM sach";
+$sql = "SELECT COUNT(*) AS numrows FROM sach WHERE `trangthai`!=-1";
 $sql .= $sql1;
 $result = executeQuery($sql);
 // echo $sql;
@@ -322,7 +322,7 @@ if ($maxPage>1) {
     }
 }
 
-$sql = "SELECT * FROM sach";
+$sql = "SELECT * FROM sach WHERE `trangthai`!=-1";
 $result = executeQuery($sql);
 $i=0;
 while ($row = $result -> fetch_array()){
@@ -373,7 +373,7 @@ echo '
                             
                         </div>
                         <div class="col-4">
-                            <img src="./asset/image/'. $row['masach'].'.png" alt="" srcset="" style="float: left;width:20rem;">
+                            <img src="./asset/image/'. $row['anh'].'" alt="" srcset="" style="float: left;width:20rem;">
                         </div>
                     </div>
                 </div>
