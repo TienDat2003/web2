@@ -395,7 +395,7 @@ for (let i=0;i<btnModals.length;i++){
     var btnCart=document.querySelector('.btn-cart')
     var btnMinus=document.querySelector(".minus")
     var btnPlus=document.querySelector(".plus")
-    var cart=document.getElementById("number-cart")
+   
     document.getElementById("book-name").innerText=product[i+(pageNumber-1)*9].name
     document.getElementById("book-info").innerText='Nhà xuất bản : '+ product[i+(pageNumber-1)*9].NXB+' | Tác giả : '+product[i+(pageNumber-1)*9].author+' | Thể loại : '+product[i+(pageNumber-1)*9].type
     if (product[i+(pageNumber-1)*9].number>0)
@@ -410,13 +410,7 @@ for (let i=0;i<btnModals.length;i++){
 
     document.getElementById('cost').innerText=(parseInt(product[i+(pageNumber-1)*9].cost)).toLocaleString()+'đ'
     cart.innerText=1
-    btnMinus.addEventListener('click',function(){
-        if (parseInt(cart.innerText)>1)
-            cart.innerText=parseInt(cart.innerText)-1
-        })
-    btnPlus.addEventListener('click',function(){
-        cart.innerText=(parseInt(cart.innerText)+1)+''
-        })
+    
     btnCart.addEventListener('click',function(){
         if (parseInt(cart.innerText)>product[i].number)
             alert('Hiện chỉ còn ' +product[i].number+' sản phẩm '+product[i].name)

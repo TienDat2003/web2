@@ -16,6 +16,18 @@ if (isset($_GET['out']))
     unset($_SESSION['user']);
     header("Location: index.php");
 }
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array();
+}
+// Thêm sản phẩm vào giỏ hàng
+if (isset($_GET['book_id'])) {
+    $book_id = $_GET['book_id'];
+    $quantity = $_GET['quantity'];
+    $_SESSION['cart'][$book_id] = $quantity;
+    // Lưu thông tin sản phẩm vào giỏ hàng
+    header("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +74,7 @@ if (isset($_GET['out']))
 
 $sql = "SELECT * FROM loaisach";
 $result = executeQuery($sql);
-$i=1;
+
 while ($row = $result -> fetch_array())
    {
         echo '<option value="'. $row['maloai'] .'"> '. $row['tenloai'] . '</option>';
@@ -208,7 +220,7 @@ while ($row = $result -> fetch_array()) {
                         <h5 class="text-danger reduce-cost">'. $row['gia']/1000 .'.000đ</h5>
                     </div>
                     <div class="col-7">
-                        <a class="btn btn-primary text-light pay-button add-cart" style="float:right;"><i class="ri-shopping-cart-2-fill"></i>Thêm vào giỏ</a>
+                        <a class="btn btn-primary text-light pay-button add-cart" href="./index.php?book_id='. $row['masach'].'&quantity=1" style="float:right;"><i class="ri-shopping-cart-2-fill"></i>Thêm vào giỏ</a>
                     </div>
                 </div>
             </div>
@@ -312,16 +324,18 @@ if ($maxPage>1) {
 
 $sql = "SELECT * FROM sach";
 $result = executeQuery($sql);
-$i=1;
+$i=0;
 while ($row = $result -> fetch_array()){
 echo '
         <div class="container d-flex justify-content-center">
         <div class="modal" id="myModal-'. $row['masach'].'" style="margin-top: 30px;">
             <div class="modal-dialog modal-xl text-center" >
                     <!-- Modal Header -->
+                    
                     <div class="modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
+                    <div class="modal-content">
                     <!-- Modal body -->
                     <div class="modal-body bg-white">
                         <div class="container">
@@ -347,28 +361,29 @@ echo '
                                 </div>
                                 <div class="col-3" style="margin-top: 10px;" class="in-cart">
                                         <button class="navbar-toggler minus" type="button" style="margin-right:20px;" ><i class="ti-minus"></i></button>
-                                        <span style="font-size:19px;" id="number-cart">1</span>
+                                        <span style="font-size:19px;" class="number-cart" id="add_cart_'.$i.'">1</span>
                                         <button class="navbar-toggler plus" type="button" style="margin-left:20px;"><i class="ti-plus"></i></button>
                                 </div>
                                 <div class="col-2">
                                 </div>
                                 <div class="col-4" style="padding-left: 55px;">
-                                    <a class="btn-cart cart 1 btn btn-primary text-light"><i class="ri-shopping-cart-2-fill"> Thêm vào giỏ hàng</i></a>
+                                    <a class="btn-cart cart btn btn-primary text-light" id = "'. $row['masach'].'"><i class="ri-shopping-cart-2-fill"> Thêm vào giỏ hàng</i></a>
                                 </div>
-                                
                             </div>
                             
                         </div>
                         <div class="col-4">
                             <img src="./asset/image/'. $row['masach'].'.png" alt="" srcset="" style="float: left;width:20rem;">
                         </div>
-                            </div>
-                        </div>
                     </div>
-                    <!-- Modal footer -->
                 </div>
-                </div>
-</div>';
+            </div>
+            </div>
+</div>
+            </div>
+
+        </div>';
+        $i=$i+1;
                 }
                
 
@@ -391,7 +406,7 @@ echo '
                     <h5><img src="./asset/image/hpolicy_img4.jpg" alt="">GIÁ CẢ HỢP LÝ</h5>
                   </div>
                 </div>
-              </div>
+            </div>
               <div class="container mt-5">
                 <div class="row">
                   <div class="col">
@@ -448,6 +463,41 @@ echo '
         </div>
     </footer>
     <!--  <script src="./js/main.js"></script>-->
+    <script>
+    let carts = document.querySelectorAll('.add-cart')
+    for (let i = 0; i < carts.length; i++) {
+        carts[i].addEventListener('click',function(){
+            alert("Đã thêm vào giỏ hàng")
+    })
+    }
+    let minus = document.querySelectorAll(".minus")
+    let plus = document.querySelectorAll(".plus")
+    for (let i=0;i<minus.length;i++)
+    {
+        minus[i].addEventListener('click',function(){
+            let cart = document.getElementById("add_cart_"+i)
+            if (parseInt(cart.innerText)>1)
+            cart.innerText = parseInt(cart.innerText)-1
+        })
+    }
+    for (let i=0;i<plus.length;i++)
+    {
+        plus[i].addEventListener('click',function(){
+            let cart = document.getElementById("add_cart_"+i)
+            cart.innerText = parseInt(cart.innerText)+1
+        })
+    }
+    let addCart = document.querySelectorAll('.btn-cart')
+    for (let i=0;i<addCart.length;i++)
+    {
+        addCart[i].addEventListener('click',function(){
+            var book_id = addCart[i].getAttribute("id");
+            let cart = document.getElementById("add_cart_"+i)
+            addCart[i].setAttribute("href", "./index.php?book_id="+book_id+"&quantity="+cart.innerText);
+        })
+    }
+</script>
+
 </body>
 </html>
 

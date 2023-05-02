@@ -68,7 +68,7 @@ echo '
 <body id="body-login">
     <div class="vh-10">
         <div class="dropdown pb-4">
-            <a href="../index.php" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
+            <a href="./index.php" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
                 <i class="ri-logout-box-line"></i><h3 class="fs-5 d-none d-sm-inline" style="font-size: 26px;color: black;">Trang chủ</h3>
             </a>
         </div>

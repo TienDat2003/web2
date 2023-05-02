@@ -1,3 +1,19 @@
+<?php
+require 'DataProvider.php';
+session_start();
+
+if (isset($_SESSION['user'])) {
+    $username = $_SESSION['user'];
+    echo '<li class="nav-item header-log-out"><a class="nav-link me-lg-3" href="./index.php" style="white-space: nowrap;"><i class="ti-user"></i> '.$username.'</a></li>';
+    echo '<li class="nav-item header-log-out"><a class="nav-link me-lg-3" id="header" href="./index.php?out=1" style="white-space: nowrap;"><i class="ri-logout-box-line"></i> Đăng xuất</a></li>';
+} 
+else {
+    // Biến session không tồn tại
+    echo '<li class="nav-item header-login"><a class="nav-link me-lg-3" id="header" href="./login.php" style="white-space: nowrap;"><i class="ri-login-box-line"></i> Đăng Nhập/Đăng Ký</a></li>';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +71,7 @@
                         </li>
                         <li class="cart nav-item">
                             <a class=" nav-link me-lg-3" href="./shopping-cart.php">
-                                <i class="ti-shopping-cart"></i> Giỏ hàng (<span>0</span>)
+                                <i class="ti-shopping-cart"></i> Giỏ hàng
                             </a>
                         </li>
                         <li class="nav-item header-user-name disappear"></li>
@@ -88,7 +104,53 @@
             </div>
         </div>
         <div class="products">
-            
+
+
+<?php
+$sum = 0;
+// Hiển thị thông tin giỏ hàng
+if (isset($_SESSION['cart'])){
+    $cart = $_SESSION['cart'];
+    $i=0;
+    foreach ($cart as $book_id => $quantity) {
+        // Lấy thông tin chi tiết sản phẩm từ cơ sở dữ liệu hoặc nguồn dữ liệu khác
+        // Hiển thị thông tin sản phẩm và số lượng trong giỏ hàng
+        $sql = "SELECT * FROM sach WHERE masach=$book_id";
+        $result = executeQuery($sql);
+        $row = $result -> fetch_array();
+        echo '
+        <div class="small-middle-container" id="cart-child-${dem}" style="text-align: center;margin-bottom: 1rem">
+            <div class="row">
+                <div class="col-1">
+                    <button type="button" class="navbar-toggler delete">
+                        <span class="text-danger d-flex align-items-center">
+                            <i class="ri-delete-bin-5-line"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="col-3">
+                    <span>'. $row['tensach'] . '</span>
+                </div>
+                <div class="col-2">
+                    <span>'. $row['gia']/1000 .'.000đ</span>
+                </div>
+                <div class="col-3 in-cart">
+                    <button class="navbar-toggler minus" type="button" style="margin-right:20px;" ><i class="ti-minus text-danger"></i></button>
+                    <span style="font-size:19px;" id="add_cart_'.$i.'">'.$quantity.'</span>
+                    <button class="navbar-toggler plus" type="button" style="margin-left:20px;"><i class="ti-plus text-primary"></i></button>
+                </div>
+                <div class="col-3 d-flex justify-content-end">
+                    <h5 class="sum-cart" id="sum_cart_'.$i.'">'. $row['gia']/1000*$quantity .'.000đ</h5>
+                </div>
+                
+            </div>
+        </div> 
+        ';
+        $sum = $row['gia']*$quantity;
+        $i=$i+1;
+    }   
+}   
+?>
         </div>
         <div class="small-middle-container " style="text-align: center;">
             <div class="row">
@@ -102,7 +164,10 @@
                     <h5>Tổng Cộng</h5>
                 </div>
                 <div class="col-3 d-flex justify-content-end">
-                    <h5 class="total-price"></h5>
+<?php
+             echo '<h5 id="total-price">'. $sum/1000 . '.000đ</h5>';
+
+?>
                 </div>
             </div>
         </div>
@@ -121,7 +186,7 @@
                     <h5></h5>
                 </div>
                 <div class="col-3 d-flex justify-content-end">
-                    <button class="btn btn-primary rounded-pill mb-2 mb-lg-0 btn-pay" data-bs-toggle="modal" data-bs-target="#myModal-pay">
+                    <button id="pay_button" class="btn btn-primary rounded-pill mb-2 mb-lg-0 btn-pay" data-bs-toggle="modal" data-bs-target="#myModal-pay">
                         <span class="d-flex align-items-center">
                             <i class="ri-money-dollar-box-fill"></i>
                             <span>Thanh toán</span>
@@ -188,7 +253,47 @@
         
                 <!-- Modal body -->
                 <div class="modal-body" id="modal-pay">
-                    
+                <form>
+            <div class="row">
+                <label for="inputImg" class="col-sm-3 col-form-label">Tên khách hàng:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="customer-name">
+                </div>
+            </div>
+            <div class="row">
+                <label for="inputImg" class="col-sm-3 col-form-label">Số điện thoại:</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="phone-number">
+                </div>
+            </div>
+            <div class="form-check" id = "address">
+                <h3 for="inputImg" class="col-form-label">Địa chỉ giao hàng:</h3>
+                <input name="address" class="form-check-input" type="radio" id="gridRadios1">
+                <label class="form-check-label" for="gridRadios1">
+                    Địa chỉ mặc định
+                </label>
+                <br>
+                <input name="address" class="form-check-input" type="radio" id="gridRadios1">
+                <label class="form-check-label" for="gridRadios1">
+                    Nhập địa chỉ mới : 
+                </label>
+                <br>
+                <input type="text" size="40">
+                <br>
+            </div>
+            <div class="form-check">
+                <h3 for="inputImg" class="col-form-label">Phương thức thanh toán:</h3>
+                <input name="t" class="form-check-input" type="radio" id="gridRadios1">
+                <label class="form-check-label" for="gridRadios1">
+                    Online
+                </label>
+                <br>
+                <input name="t" class="form-check-input" type="radio" id="gridRadios1">
+                <label class="form-check-label" for="gridRadios1">
+                    OCD
+                </label>
+            </div>
+        </form>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -198,6 +303,42 @@
         </div>
     </div>
     <!-- <script src="./js/main.js"></script> -->
-    <script src="./js/cart.js"></script>
+    <!-- <script src="./js/cart.js"></script> -->
+    <script>
+        let minus = document.querySelectorAll(".minus")
+        let plus = document.querySelectorAll(".plus")
+        for (let i=0;i<minus.length;i++)
+        {
+            minus[i].addEventListener('click',function(){
+                let sum = document.getElementById("sum_cart_"+i)
+                let cart = document.getElementById("add_cart_"+i)
+                let total = document.getElementById("total-price")
+                if (parseInt(cart.innerText)>1){
+                    sum.innerText = (parseInt(sum.innerText)/parseInt(cart.innerText))*(parseInt(cart.innerText)-1)+".000đ"
+                    total.innerText = parseInt(total.innerText)+(parseInt(sum.innerText)/parseInt(cart.innerText))+".000đ"
+                    cart.innerText = parseInt(cart.innerText)-1
+                }
+            })
+        }
+        for (let i=0;i<plus.length;i++)
+        {
+            plus[i].addEventListener('click',function(){
+                let sum = document.getElementById("sum_cart_"+i)
+                let total = document.getElementById("total-price")
+                let cart = document.getElementById("add_cart_"+i)
+                total.innerText = parseInt(total.innerText)+(parseInt(sum.innerText)/parseInt(cart.innerText))+".000đ"
+                sum.innerText = (parseInt(sum.innerText)/parseInt(cart.innerText))*(parseInt(cart.innerText)+1)+".000đ"
+                cart.innerText = parseInt(cart.innerText)+1
+            })
+        }
+        let payButton=document.querySelector("pay_button")
+        let header = document.getElementById("header")
+        payButton.addEventListener('click',function(){
+                if (header.innerText=="Đăng xuất"){
+                    alert("Đăng nhập để thanh toán")
+                    location.href = "login.php"
+                }
+            })
+    </script>
 </body>
 </html>
