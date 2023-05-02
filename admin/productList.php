@@ -1,5 +1,6 @@
 <?php
 require '../DataProvider.php';
+session_start();
 ?>
 
 <?php
@@ -24,23 +25,29 @@ if (isset($_GET['xoa']))
 ?>
 <?php
 	if (isset($_POST['ten']) && isset($_POST['mota']) && isset($_POST['gia']) && isset($_POST['nxb']) && isset($_POST['tacgia'])){
-		$tmp_name = $_FILES["image_url"]["tmp_name"];
+        $tmp_name = $_FILES["image_url"]["tmp_name"];
 		$fldimageurl = "../asset/image/" . $_FILES["image_url"]["name"];
 		move_uploaded_file($tmp_name, $fldimageurl);
-		echo($fldimageurl);
-		echo($_FILES["image_url"]["name"]);
+        
 		$sql = "UPDATE `sach` SET `tensach`='" . $_POST['ten'] . "'," . 
-				"`maloai`='" . $_POST['gridRadios'] . "'," . 
-				"`gia`='" . $_POST['gia'] . "'," . 
-				"`nxb`='" . $_POST['nxb'] . "'," . 
-				"`tacgia`='" . $_POST['tacgia'] . "'," . 
-				"`mota`='" . $_POST['mota'] . "'," . 
-				"`anh`='". $_FILES["image_url"]["name"] ."' WHERE `masach` = ".$_POST['masach']."";
+        "`maloai`='" . $_POST['type'] . "'," . 
+        "`gia`='" . $_POST['gia'] . "'," . 
+        "`nxb`='" . $_POST['nxb'] . "'," . 
+        "`tacgia`='" . $_POST['tacgia'] . "'," . 
+        "`mota`='" . $_POST['mota'] . "'," . 
+        "`anh`='" . $_FILES["image_url"]["name"] . "'" . 
+        " WHERE `masach` = ".$_POST['masach']."";
+        if ($_FILES["image_url"]["name"]=="")
+            $sql = "UPDATE `sach` SET `tensach`='" . $_POST['ten'] . "'," . 
+            "`maloai`='" . $_POST['type'] . "'," . 
+            "`gia`='" . $_POST['gia'] . "'," . 
+            "`nxb`='" . $_POST['nxb'] . "'," . 
+            "`tacgia`='" . $_POST['tacgia'] . "'," . 
+            "`mota`='" . $_POST['mota'] . "'" . 
+            " WHERE `masach` = ".$_POST['masach']."";
         $result=executeQuery($sql);
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,7 +101,7 @@ if (isset($_GET['xoa']))
                 <div class="row">
                     <div class="col-12">
                     <h2>Chọn loại sản phẩm:</h2>
-                    <form method="POST">
+                    <form method="GET">
                     <select name="loai" class="form-select form-select-sm" id="select-bottom" style="width: 200px;margin-right: 14px;" aria-label=".form-select-sm example">
                         <option value="0" selected="selected">Tất cả</option>
 <?php
@@ -157,9 +164,9 @@ while ($row = $result -> fetch_array())
         // Lấy danh sách sản phẩm và loại sản phẩm từ cơ sở dữ liệu
         $sql = "SELECT * FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER BY s.masach ASC";
         // kiểm tra xem form có được submit hay chưa
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['loai'])) {
             // lấy giá trị của select và lưu vào biến
-            $loai = $_POST['loai'];
+            $loai = $_GET['loai'];
             // xử lý dữ liệu tương ứng với giá trị lấy được
             if ($loai == 0) {
                 $sql = "SELECT * FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER BY s.masach ASC";
@@ -239,9 +246,9 @@ echo '
 
 $sql = "SELECT * FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER BY s.masach ASC";
         // kiểm tra xem form có được submit hay chưa
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             // lấy giá trị của select và lưu vào biến
-            $loai = $_POST['loai'];
+            $loai = $_GET['loai'];
             // xử lý dữ liệu tương ứng với giá trị lấy được
             if ($loai == 0) {
                 $sql = "SELECT * FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER BY s.masach ASC";
@@ -264,18 +271,18 @@ $sql = "SELECT * FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER 
                 <div class="modal-body">
                     <div class="col-auto col-md-3 col-xl-3 px-sm-6 px-2"  style="margin-left: 15em;">
                         <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2">            
-                            <form style="width: 40rem;" method="POST" action="productList.php">
+                            <form style="width: 40rem;" method="POST" action="productList.php"  enctype="multipart/form-data">
                             <input type="text" class="disappear" name="masach" value="'. $row["masach"] .'">
                             <div class="row mb-3">
                             <label for="inputImg" class="col-sm-3 col-form-label">Chọn ảnh</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control" id="img-upload" name="image_url" accept="image/png">
+                                <input type="file" class="form-control img-upload" name="image_url" accept="image/png">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-3"></div>
                             <div class="col-sm-3" id="image" style="margin-left: 20px;">
-                            <img src="../asset/image/'. $row["anh"] .'" id="image_" width="300" height="300">
+                            <img src="../asset/image/'. $row["anh"] .'" class="image_1" width="300" height="300">
                             </div>
                         </div>
                             <div class="row mb-3">
@@ -362,5 +369,24 @@ while ($row1 = $result1 -> fetch_array())
                 </div>
             </div>
         </div>
+        <script>
+            const fileUpload = document.querySelectorAll('.img-upload')
+            const reader = new FileReader()
+            for (let i=0;i<fileUpload.length;i++) {
+                fileUpload[i].addEventListener('change', (event) => {
+                    var files = event.target.files;
+                    var file = files[0];
+                    reader.readAsDataURL(file);
+                    var img = document.getElementsByClassName('image_1');
+                    reader.addEventListener('load', (event) => {
+                    img[i].src = event.target.result;
+                    img[i].alt = file.name;
+                    img[i].width = 300; // Đặt giá trị cho thuộc tính width
+                    img[i].height = 300;
+                });
+            });
+            }
+        </script>
+
 </body>
 </html>

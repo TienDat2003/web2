@@ -72,16 +72,13 @@
                     <div class="col-4" style="text-align:center;">
                         <h4> Email</h4>
                      </div>
-                    <div class="col-1" style="text-align:center;">
+                    <div class="col-3" style="text-align:center;">
                        <h4> Mật khẩu</h4>
                     </div>
-                    <div class="col-2" style="text-align:center;">
-                        <h4>Địa chỉ giao hàng</h4>
-                    </div>
-                    <div class="col-2" style="text-align:center;">
-                        <h4>Số điện thoại</h4>
-                    </div>
                     <div class="col-1" style="text-align:center;">
+                        <h4>Trạng thái</h4>
+                    </div>
+                    <div class="col-2" style="text-align:center;">
                         <h4>Chức năng</h4>
                     </div>
                 </div>

@@ -188,7 +188,6 @@ while ($row = $result -> fetch_array())
     </div>
 
     <script>
-        
         const fileUpload = document.querySelector('#img-upload')
         const inputName=document.querySelector('#inputName')
         const inputPrice=document.querySelector('#inputPrice')
