@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2023 at 05:57 AM
+-- Generation Time: May 03, 2023 at 06:16 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -133,13 +133,11 @@ CREATE TABLE `nguoidung` (
 --
 
 INSERT INTO `nguoidung` (`tendangnhap`, `matkhau`, `email`, `trangThai`) VALUES
-('ahdjashd123', '123', '', 1),
 ('DoF123', '12345', 'Ghuynh7@gmail.com', 1),
 ('HoangD', '123456a', 'Dhoang4@gmail.com', 1),
 ('HuynhG', '859325893', 'Ghuynh7@gmail.com', 1),
 ('LeC', '2942984', 'Cle3@gmail.com', 1),
 ('NguyenA', 'Iloveyou', 'Anguyen1@gmail.com', 1),
-('skflsfk', '123', '', 1),
 ('TranB', 'Vietnam1234', 'Btran2@gmail.com', 1),
 ('VoE', 'storeTop1Server', 'Evo5@gmail.com', 1);
 
@@ -195,8 +193,7 @@ INSERT INTO `sach` (`masach`, `tensach`, `maloai`, `gia`, `nxb`, `tacgia`, `mota
 (27, 'Bụi Sao', 1, 119000, 'Nhà Xuất Bản Hà Nội', 'Neil Gaiman', 'Đến tuổi cập kê, Tristran Thorn đem lòng si mê một thiếu nữ xinh đẹp trong ngôi làng Bức Tường nơi anh lớn lên. Vì lời hứa sẽ cùng cô sánh vai trong thánh đường, chàng trai trẻ khăn gói lên đường tiến vào Xứ Tiên để tìm một ngôi sao băng từ trên trời rơi xuống. Chuyến phiêu lưu ở xứ sở kỳ lạ, rùng rợn mà đầy nhiệm màu đã xoay chuyển con người và thế giới quan của Tristran theo những cách anh chưa từng ngờ đến, biến anh thành một người hùng chân chính trong câu chuyện của mình. Cổ quái và nhân văn, đen tối và giàu cảm xúc, Bụi sao đem đến vô khối những câu chuyện chưa kể đằng sau cuộc hành trình tầm mộng của một vị anh hùng trẻ tuổi, cốt để chứng tỏ rằng chuyện thần tiên thực chất cũng dành cho người lớn.', 1, '27.png'),
 (28, 'Hy Vọng Mong Manh', 1, 158000, 'Nhà Xuất Bản Hà Nội', 'Shizukui Shusuke', 'Kiến trúc sư Kazuto và người vợ Kiyomi đang sống bình yên với cậu con trai Tadashi học lớp 10, và con gái Miyabi chuẩn bị lên cấp ba. Một chấn thương khi chơi bóng đá khiến Tadashi không thể tiếp tục theo đuổi đam mê, từ đó cậu chán chường, đôi lúc chơi bời qua đêm bên ngoài. Không ngờ, vào một tối cuối tuần trước khi kỳ nghỉ hè kết thúc, Tadashi ra khỏi nhà đi chơi như mọi khi và không quay về. Hai ngày sau, một xác chết là thiếu niên cấp ba được phát hiện – cậu bé bị đánh hội đồng và là bạn của Tadashi. Người ta được biết còn một nạn nhân nữa chưa tìm thấy. Vợ chồng Kazuto đã trải qua đủ loại cung bậc cảm xúc. Họ hy vọng vào sự thực nào đây: đứa con trai duy nhất là nạn nhân hay hung thủ? Dù là trường hợp nào cũng đều quá cay đắng và nghiệt ngã.', 1, '27.png'),
 (29, 'Tâm Lý Học Nói Gì Về Nỗi Đau?', 2, 86000, 'Nhà Xuất Bản Thế Giới', 'Richard Gross', 'Tâm lý học nói gì về nỗi đau?” là một cuốn sách nhân văn phân tích những phản ứng đa dạng của chúng ta khi mất đi một người thân yêu, cũng như đi sâu tìm hiểu cách các nhà tâm lý học giải thích về trải nghiệm này. Cuốn sách cũng khảo nghiệm các tập quán văn hóa - xã hội vốn đang định khung hoặc hạn chế hiểu biết về quá trình đau buồn, từ bộ môn phân tâm học tiên phong của Sigmund Freud cho tới quan niệm đã bị phủ nhận về các \"giai đoạn\" của nỗi đau. Ai trong đời cũng phải trải qua nỗi đau mất người thân, và “Tâm lý học nói gì về nỗi đau?” sẽ giúp bạn hiểu thêm về cảm xúc đau buồn đi cùng trải nghiệm ấy, của cả bản thân lẫn những người khác.', 1, '29.png'),
-(30, 'Thế Giới Không Có Người Xấu', 2, 89000, 'Nhà Xuất Bản Dân Trí', 'Whon Jaehun', 'Gửi đến bạn, người vẫn thường cảm thấy tổn thương, cô đơn và mỏi mệt, hãy mở cuốn sách này ra để đón nhận sự an ủi, vỗ về và tìm thấy những phút giây khiến trái tim bạn hạnh phúc. “Thế giới không có người xấu” là cuốn sách gói gọn những tâm tình chưa thể giãi bày từ tác giả muốn gửi đến bạn đọc, đồng thời thể hiện cái nhìn sâu sắc của ông về cuộc đời. Bằng những trải nghiệm thực tế của bản thân, ông cho rằng giống như mọi căn bệnh đều có nguyên do, thực ra trên thế giới này vốn không có người xấu, chỉ là vẫn luôn có những điều bạn chưa biết mà thôi. Bạn hãy thử thay đổi góc nhìn của chính mình, sống bình thản hơn, tập biết ơn những điều nhỏ bé và tích cực lấp đầy cuộc sống bằng những khoảnh khắc tươi sáng nhất. Hy vọng cuốn sách này có thể giúp bạn vững tin bước đi trên hành trình cuộc đời nhiều chông gai.', 1, '30.png'),
-(35, 'i', 1, 7, '8', 'o', 'ịijk', 0, '4.png');
+(30, 'Thế Giới Không Có Người Xấu', 2, 89000, 'Nhà Xuất Bản Dân Trí', 'Whon Jaehun', 'Gửi đến bạn, người vẫn thường cảm thấy tổn thương, cô đơn và mỏi mệt, hãy mở cuốn sách này ra để đón nhận sự an ủi, vỗ về và tìm thấy những phút giây khiến trái tim bạn hạnh phúc. “Thế giới không có người xấu” là cuốn sách gói gọn những tâm tình chưa thể giãi bày từ tác giả muốn gửi đến bạn đọc, đồng thời thể hiện cái nhìn sâu sắc của ông về cuộc đời. Bằng những trải nghiệm thực tế của bản thân, ông cho rằng giống như mọi căn bệnh đều có nguyên do, thực ra trên thế giới này vốn không có người xấu, chỉ là vẫn luôn có những điều bạn chưa biết mà thôi. Bạn hãy thử thay đổi góc nhìn của chính mình, sống bình thản hơn, tập biết ơn những điều nhỏ bé và tích cực lấp đầy cuộc sống bằng những khoảnh khắc tươi sáng nhất. Hy vọng cuốn sách này có thể giúp bạn vững tin bước đi trên hành trình cuộc đời nhiều chông gai.', 1, '30.png');
 
 --
 -- Indexes for dumped tables

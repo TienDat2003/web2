@@ -21,6 +21,12 @@ if (isset($_POST['tendangnhap']))
     executeQuery($sql);
     header("Location: customer.php");
 }
+if (isset($_POST['tendangnhap1']))
+{   
+    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `trangThai`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','1')";
+    executeQuery($sql);
+    header("Location: customer.php");
+}
 ?>
 
 
@@ -86,7 +92,12 @@ if (isset($_POST['tendangnhap']))
                 </div>
             </div>
             <div class="col py-3" id="product-list">
-                <br>
+            <div class="row">
+            <div class="col-2">
+            <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_add">Thêm người dùng</button>
+            </div>
+            </div>
+
                 <br>
                 <div class="row">
                     <div class="col-2" style="text-align:center;">
@@ -182,6 +193,76 @@ while ($row = $result -> fetch_array()) {
                 </div>';
 }
 ?>
+
+<div class="modal" id="myModal_add">
+<div class="modal-dialog d-flex" style="min-width: 100%;">
+    <div class="container">
+    <div class="modal-content" style="width:60%;">
+        <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="col-auto col-md-3 col-xl-3 px-sm-6 px-2"  style="margin-left: 15em;">
+                <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2">            
+                    <form style="width: 40rem;" method="POST" onsubmit="return validateForm()">
+                    <div class="row mb-3">
+                        <label for="inputName1" class="col-sm-3 col-form-label">Tên đăng nhập:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="tendangnhap1" id="inputName1">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputEmail1" class="col-sm-3 col-form-label">Email:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="email1" id="inputEmail1">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword1" class="col-sm-3 col-form-label">Mật khẩu:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="password1" id="inputPassword1">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword2" class="col-sm-3 col-form-label">Nhập lại mật khẩu:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="inputPassword2">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btn-confirm">Thêm</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
+            </div>
+        </div>
+        </div>
     <!-- <script src="./customer.js"></script> -->
+    <script>
+    funtion validateForm(){
+            let username = document.getElementById("inputName1");
+            let email = document.getElementById("inputEmail1");
+            let password = document.getElementById("inputPassword1");
+            let repassword = document.getElementById("inputPassword2");
+            if (!username.value || !email.value || !password.value || !repassword.value) {
+                alert("Vui lòng nhập đầy đủ thông tin");
+                return false;
+            } else {
+                if (email.value.indexOf("@gmail.com")==-1) {
+                    alert("Email không hợp lệ")
+                    return false;
+                }
+                else {
+                if (password.value != repassword.value) {
+                    alert("Mật khẩu không khớp");
+                    return false;
+                }
+        }
+        return true;
+    }
+}
+    </script>
 </body>
 </html>
