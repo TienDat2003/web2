@@ -10,7 +10,7 @@ for (let i=0;i<order.length;i++){
             <div class="form-check">
             <input class="form-check-input" type="checkbox" name="check" class="check-box">
             <label class="form-check-label" for="gridRadios1">
-                <h5 id="check-${i}">Chưa xử lí</h5>
+                <h5 id="check-${i}">Chưa gi</h5>
             </label>
             </div>
         </div>

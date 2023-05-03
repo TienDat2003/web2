@@ -1,3 +1,7 @@
+<?php
+require '../DataProvider.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,24 +51,59 @@
                     </div>
                 </div>
             </div>
-
             
             <div class="box container py-5" style="width:1000px;text-align: center; border-collapse: separate; border-radius: 15px;">
+            <div class="row">
+                    <div class="col-6">
+                        <h3 style="text-align: left;">Lọc đơn hàng: </h3>
+                    </div>
+                </div>
+                <br>
+            <form method="POST">
                 <div class="row">
                     <div class="col-2">
                         <h3 style="text-align: left;">Từ ngày:</h3>
                     </div>
                     <div class="col-2">
-                        <input type="date" name="bday" value="2022-06-05">
+                        <input type="date" name="tungay" value="2022-06-05">
                     </div>
                     <div class="col-2">
                         <h3>Đến ngày:</h3>
                     </div>
                     <div class="col-4">
-                        <input type="date" value="2022-12-05">
-                        <input type="submit" value="Xác nhận">
+                        <input type="date"  name="denngay" value="2022-12-05">
+                        
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-4">
+                        <h3 style="text-align: left;">Địa chỉ giao hàng : </h3>
+                    </div>
+                    <div class="col-4">
+                    <select name="diachi" class="form-select form-select-sm" id="select-bottom" style="width: 200px;margin-right: 14px;" aria-label=".form-select-sm example"> 
+                        <option value="0" selected="selected">Tất cả</option>
+                        <option value="Quận 1"> Quận 1</option>
+                        <option value="Quận 2"> Quận 2</option>
+                        <option value="Quận 3"> Quận 3</option>
+                        <option value="Quận 4"> Quận 4</option>
+                        <option value="Quận 5"> Quận 5</option>
+                        <option value="Quận 6"> Quận 6</option>
+                        <option value="Quận 7"> Quận 7</option>
+                        <option value="Quận 8"> Quận 8</option>
+                        <option value="Quận 10"> Quận 10</option>
+                        <option value="Quận 11"> Quận 11</option>
+                        <option value="Quận Tân Bình"> Quận Tân Bình</option>
+                        <option value="Quận Tân Phú"> Quận Tân Phú</option>
+                        <option value="Quận Phú Nhuận"> Quận Phú Nhuân</option>
+                        <option value="Quận Bình Thạnh"> Quận Bình Thạnh</option>
+                        <option value="Quận Gò Vấp"> Quận Gò Vấp</option>
+</select>
+                    </div>
+                    <div class="col-2">
+                    <input type="submit" value="Xác nhận">
+                    </div>
+                </div>
+                <form>
                 <br>
                 <div class="container " style="text-align: center;">
                     <div class="row">
@@ -82,25 +121,67 @@
                 <hr>
                 <div class="container">
                     <div class="row">
-                        <div class="col-1"  style="margin-left: 2em;">
-                            <h5> Trạng thái</h5>
-                        </div>
-                        <div class="col-2" style="margin-left: 3em;">
-                            <h5>Tên khách hàng</h5>
+                        <div class="col-1">
+                            <h5>ID</h5>
                         </div>
                         <div class="col-4">
                             <h5>Địa chỉ giao hàng</h5>
                         </div>
                         <div class="col-2">
+                            <h5>Tên đăng nhập</h5>
+                        </div>
+                        <div class="col-2">
                             <h5>Số điện thoại</h5>
                         </div>
                         <div class="col-2">
+                            <h5>Ngày đặt</h5>
+                        </div>
+                        <div class="col-1">
                             <h5>Chi tiết</h5>
                         </div>
                     </div>
                     <hr>
                     <div id="order-list">
-                        
+<?php
+$sql = "SELECT * FROM `donhang`";
+if (isset($_POST['tungay'])&&isset($_POST['denngay'])) {
+$fromDate = $_POST['tungay'];
+$toDate = $_POST['denngay'];
+// Câu truy vấn SQL để lọc đơn hàng theo khoảng thời gian giao hàng
+    $sql = "SELECT * FROM donhang WHERE ngay >= '$fromDate' AND ngay <= '$toDate'";
+if ($_POST['diachi']!='0')
+    $sql .= " AND `diachi` LIKE '%" . $_POST['diachi'] . "%'";
+}
+$result = executeQuery($sql);
+while ($row = $result -> fetch_array()){
+    echo '
+            <div class="row">
+            <div class="col-1">
+                <h5>'. $row['madonhang'] .'</h6>
+            </div>
+            <div class="col-4">
+                <h6>'. $row['diachi'] .'</h6>
+            </div>
+            <div class="col-2">
+                <h6>'. $row['tendangnhap'] .'</h6>
+            </div>
+            <div class="col-2">
+                <h6>'. $row['sodienthoai'] .'</h6>
+            </div>
+            <div class="col-2">
+                <h6>'. $row['ngay'] .'</h6>
+            </div>
+            <div class="col-1">
+                <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row["madonhang"] .'"><i class="ri-file-text-fill"></i></button>
+            </div>
+        </div>
+        <hr>
+    ';
+}
+
+?>
+
+
                     </div>
                 </div>
                 
@@ -108,21 +189,91 @@
                     <h5 style="margin-left: 630px;width: 100px;margin: right 0px;">Total:</h5>
                 </div> -->
             </div>
-            <div class="modal" id="myModal-edit" style="margin-top: 5%;">
+            
+<?php
+$sql = "SELECT * FROM `donhang`";
+$result = executeQuery($sql);
+while ($row = $result -> fetch_array()){
+echo '
+<div class="modal" id="myModal_edit_'.$row["madonhang"].'" style="margin-top: 5%;">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2>Chi tiết đơn hàng</h2>
+                            <h2>Chi tiết đơn hàng : '.$row["madonhang"].'</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <!-- Modal body -->
-                        <div class="modal-body" id="modal-order">
-                            
-                        </div>
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger confirm-button" data-bs-dismiss="modal">Xác nhận</button>
-                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                            </div>
+                            <div class="col-1">
+                                <h5>Mã sách</h5>
+                            </div>
+                            <div class="col-4" text-align="center">
+                                <h5>Tên sách</h5>
+                            </div>
+                            <div class="col-2">
+                                <h5>Giá</h5>
+                            </div>
+                            <div class="col-2">
+                                <h5 style="font-size:19px;">Số lượng</h5>
+                            </div>
+                            <div class="col-2 d-flex">
+                                <h5 class="sum-cart">Tổng tiền</h5>
+                            </div>
+                    </div>';
+$sql1 = "SELECT * FROM `chitietdonhang` WHERE `madonhang`='" . $row["madonhang"] . "'";
+$result1 = executeQuery($sql1);
+$sum=0;
+while ($row1 = $result1 -> fetch_array()){
+    $sql2 = "SELECT * FROM sach WHERE masach ='". $row1["masach"] ."'";
+    $result2 = executeQuery($sql2);
+    $row2 = $result2-> fetch_array();
+    $sum=$sum+$row2["gia"]*$row1["soluong"];
+    echo '
+        <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-1">
+            <h6>'. $row1["masach"] .'</h6>
+        </div>
+        <div class="col-4" text-align="center">
+            <h6>'. $row2["tensach"] .'</h6>
+        </div>
+        <div class="col-2">
+            <h6>'. $row2["gia"]/1000 .'.000đ</h6>
+        </div>
+        <div class="col-2">
+            <h6 style="margin-left: 20px;">'. $row1["soluong"] .'</h6>
+        </div>
+        <div class="col-2 d-flex">
+            <h6 class="sum-cart">'. $row2["gia"]*$row1["soluong"]/1000  .'.000đ</h6>
+        </div>
+    </div>';
+}
+echo '
+<div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-5">
+        </div>
+        <div class="col-4">
+        <h4>Tổng giá trị đơn hàng: </h4>
+        </div>
+        <div class="col-2 d-flex">
+            <h5 class="sum-cart">' . $sum/1000 .'.000đ</h5>
+        </div>
+
+    </div>';
+echo '
+</div>
+</div>
+</div>
+                        
+';
+}
+?>
+
                     </div>
                 </div>
              </div>

@@ -343,8 +343,16 @@ echo '
                             <div class="col-8">
                             <h3 id="book-name">'. $row['tensach'].'</h3>
                             <hr>
+                            
                             <h5>Mô tả:</h5>
                             <span id="book-content">'. $row['mota'].'</span>
+                            <hr>
+                            <div class="row">
+                                <h6>Tác giả : '. $row['tacgia'].'</h6>
+                            </div>
+                            <div class="row">
+                                <h6>NXB:'. $row['nxb'].' </h6>
+                            </div>
                             <hr>
                             <div class="row">
                                 <div class="col-2 text-danger">
