@@ -24,8 +24,7 @@ require 'DataProvider.php';
 <!-- Đăng ký -->
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `hoten`, `sodienthoai`, `email`, `trangThai`) VALUES ('"
-    .$_POST['name']. "','" .$_POST['password']. "',' ',' ','".$_POST['email']."','1')"  ;
+    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `trangThai`) VALUES ('" . $_POST['name'] . "','" . $_POST['password'] . "','" . $_POST['email'] . "','1')";
     $result = executeQuery($sql);
 }
 // Kết nối tới cơ sở dữ liệu (thay đổi thông tin kết nối tương ứng với hệ thống của bạn)

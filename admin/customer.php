@@ -1,3 +1,29 @@
+<?php
+require '../DataProvider.php';
+session_start();
+
+if (isset($_GET['khoa']))
+{   
+    $sql = "UPDATE `nguoidung` SET `trangthai`='0' WHERE `tendangnhap`='".$_GET['khoa']."'";
+    executeQuery($sql);
+    header("Location: customer.php");
+}
+if (isset($_GET['bokhoa']))
+{   
+    $sql = "UPDATE `nguoidung` SET `trangthai`='1' WHERE `tendangnhap`='".$_GET['bokhoa']."'";
+    executeQuery($sql);
+    header("Location: customer.php");
+}
+
+if (isset($_POST['tendangnhap']))
+{   
+    $sql = "UPDATE `nguoidung` SET `tendangnhap`='" . $_POST['tendangnhapmoi'] . "', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" . $_POST['tendangnhap'] . "'";
+    executeQuery($sql);
+    header("Location: customer.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,9 +86,6 @@
                 </div>
             </div>
             <div class="col py-3" id="product-list">
-                <div class="row">
-                    <h1 id="header">Số lượng khách hàng : </h1>
-                </div>
                 <br>
                 <br>
                 <div class="row">
@@ -75,20 +98,55 @@
                     <div class="col-3" style="text-align:center;">
                        <h4> Mật khẩu</h4>
                     </div>
-                    <div class="col-1" style="text-align:center;">
-                        <h4>Trạng thái</h4>
-                    </div>
                     <div class="col-2" style="text-align:center;">
                         <h4>Chức năng</h4>
                     </div>
                 </div>
                 <hr>
-            </div>
-            
+<?php
+$sql = "SELECT * FROM `nguoidung`";
+$result = executeQuery($sql);
+while ($row = $result -> fetch_array())
+   {
+    echo '
+                <div class="row">
+                    <div class="col-2" style="text-align:center;">
+                        <h5>'.$row['tendangnhap'].'</h5>
+                    </div>
+                    <div class="col-4" style="text-align:center;">
+                        <h5>'.$row['email'].'</h5>
+                     </div>
+                    <div class="col-3" style="text-align:center;">
+                       <h5>***************</h5>
+                    </div>
+        <div class="col-2" style="text-align:center;">
+        <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row['tendangnhap'] .'">Sửa</button>&nbsp
+                    ';
+    if ($row['trangThai']==1)
+        echo '<a href="./customer.php?khoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Khóa</button></a>';
+    else 
+        echo '<a href="./customer.php?bokhoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Mở</button></a>';          
+    echo '
+                    </div>
+                </div>
+                <hr>
+    ';
+   }
+// Mệt thật chứ,cmn
+?>
+
+</div>
+
+
         </div>
         
     </div>
-    <div class="modal" id="myModal-edit">
+<?php
+$sql = "SELECT * FROM `nguoidung`";
+$result = executeQuery($sql);
+while ($row = $result -> fetch_array()) {  
+    echo '
+    <div class="modal" id="myModal_edit_'. $row['tendangnhap'] .'">
         <div class="modal-dialog d-flex" style="min-width: 100%;">
             <div class="container">
             <div class="modal-content" style="width:60%;">
@@ -98,79 +156,32 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="col-auto col-md-3 col-xl-3 px-sm-6 px-2"  style="margin-left: 15em;">
-                        
                         <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2">            
-                            <form style="width: 40rem;">
-                            
+                            <form style="width: 40rem;" method="POST">
+                            <input type="text" class="form-control"  style="display: none;" name="tendangnhap" id="inputName" value="'. $row['tendangnhap'] .'">
                             <div class="row mb-3">
                                 <label for="inputName" class="col-sm-3 col-form-label">Tên đăng nhập:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="inputName" readonly>
+                                    <input type="text" class="form-control" name="tendangnhapmoi" id="inputName" value="'. $row['tendangnhap'] .'">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="inputParValue" class="col-sm-3 col-form-label">Email:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="inputParValue">
+                                    <input type="text" class="form-control" name="email" id="inputParValue"  value="'. $row['email'] .'">
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputPrice" class="col-sm-3 col-form-label">Mật khẩu:</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="inputPrice">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-3 col-form-label">Địa chỉ giao hàng:</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="inputNumber">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputNXB" class="col-sm-3 col-form-label">Số điện thoại:</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="inputNXB">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-9"></div>
-                                <div class="col-3">
-                                    <button type="button" class="btn btn-primary" id="btn-confirm">Xác nhận</button>
-                                </div>
-                            </div>
-                            
+                            <button type="submit" class="btn btn-primary" id="btn-confirm">Lưu thay đổi</button>
                         </form>
-                        
                     </div>
-                    
                 </div>
             </div> 
         </div>
                     </div>
                 </div>
-                </div>
-                <div class="modal" id="myModal-delete" style="margin-top: 15%;">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 id="header-name"></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <span id="modal-text">
-                                    Xác nhận khóa tài khoản?
-                                </span>
-                                <br>
-            
-                            </div>
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger confirm-button-1" data-bs-dismiss="modal">Xác nhận</button>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-    <script src="./customer.js"></script>
+                </div>';
+}
+?>
+    <!-- <script src="./customer.js"></script> -->
 </body>
 </html>
