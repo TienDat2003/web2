@@ -65,13 +65,13 @@ session_start();
                         <h3 style="text-align: left;">Từ ngày:</h3>
                     </div>
                     <div class="col-2">
-                        <input type="date" name="tungay" value="2022-06-05">
+                        <input type="date" name="tungay" value="">
                     </div>
                     <div class="col-2">
                         <h3>Đến ngày:</h3>
                     </div>
                     <div class="col-4">
-                        <input type="date"  name="denngay" value="2022-12-05">
+                        <input type="date"  name="denngay" value="">
                         
                     </div>
                 </div>
