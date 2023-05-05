@@ -266,16 +266,6 @@ if (isset($_SESSION['cart'])){
             </div>
             <div class="form-check" id = "address">
                 <h3 for="inputImg" class="col-form-label">Địa chỉ giao hàng:</h3>
-                <input name="address" class="form-check-input" type="radio" id="gridRadios1">
-                <label class="form-check-label" for="gridRadios1">
-                    Địa chỉ mặc định
-                </label>
-                <br>
-                <input name="address" class="form-check-input" type="radio" id="gridRadios1">
-                <label class="form-check-label" for="gridRadios1">
-                    Nhập địa chỉ mới : 
-                </label>
-                <br>
                 <input type="text" size="40">
                 <br>
             </div>
@@ -340,7 +330,7 @@ if (isset($_SESSION['cart'])){
         let payButton=document.querySelector("#pay_button")
         let header = document.getElementById("header_1")
         payButton.addEventListener('click',function(){
-                if (header.innerText!="Đăng xuất"){
+                if (header.innerText!=" Đăng xuất"){
                     alert("Đăng nhập để thanh toán")
                     location.href = "login.php"
                 }

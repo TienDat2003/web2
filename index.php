@@ -161,11 +161,13 @@ $temp=0;
 $name="";
 if (isset($_GET['theloai']))
 {   
+    $theloai=$_GET['theloai'];
     $result = executeQuery("SELECT * FROM loaisach WHERE tenloai = '".$_GET['theloai']."'");
     $row = $result -> fetch_array();
     $loai = $row['maloai'];
     $sql .= " AND maloai = $loai ";
     $sql1 .= " AND maloai = $loai ";
+    $temp=2;
 }
 if (isset($_GET['txtName'])&& $_GET['txtName']!="")
 {
@@ -284,7 +286,7 @@ if ($maxPage>1) {
         "</ul>";//<center>". $first . $prev . $nav . $next . $last . "</center>
     
 }
-    else{
+    if ($temp==1) {
         for($page = 1; $page <= $maxPage; $page++){
             if ($page == $current_page) {
                 $nav .= "<li class='page-item'><a class='page-link' >$page</a> </li>"; // khong can tao link cho trang hien hanh
@@ -309,6 +311,42 @@ if ($maxPage>1) {
             $page = $current_page + 1;
             $next = "<li class='page-item'><a class='page-link' href=\"$self?page=$page&txtName=$name&select-type=$type&min-find=$min&max-find=$max\">[Trang kế]</a></li>";// <a href=\"$self?page=$page\">[Trang kế]</a>
             $last = "<li class='page-item'><a class='page-link' href=\"$self?page=$maxPage&txtName=$name&select-type=$type&min-find=$min&max-find=$max\">[Trang cuối]</a></li>";// <a href=\"$self?page=$maxPage\">[Trang cuối]</a>
+        }
+        else
+        {
+            $next = '&nbsp;'; // dang o trang cuoi, khong can in lien ket trang ke
+            $last = '&nbsp;'; // va lien ket trang cuoi
+        }
+        // hien thi cac link lien ket trang
+        echo " <ul class='pagination justify-content-center'>"
+        . $first . $prev . $nav . $next . $last .
+        "</ul>";//<center>". $first . $prev . $nav . $next . $last . "</center>
+    }
+    if ($temp==2) {
+        for($page = 1; $page <= $maxPage; $page++){
+            if ($page == $current_page) {
+                $nav .= "<li class='page-item'><a class='page-link' >$page</a> </li>"; // khong can tao link cho trang hien hanh
+            }
+            else {
+                $nav .= "<li class='page-item'><a class='page-link' href=\"$self?page=$page&theloai=$theloai\">$page</a> </li>";// <a href=\"$self?page=$page\">$page</a>
+            }
+        }
+        if ($current_page > 1)
+        {
+            $page = $current_page - 1;
+            $prev = "<li class='page-item'><a class='page-link' href=\"$self?page=$page&theloai=$theloai\">[Trang trước]</a> </li>";// <a href=\"$self?page=$page\">[Trang trước]</a> 
+            $first = "<li class='page-item'><a class='page-link' href=\"$self?page=1&theloai=$theloai\">[Trang đầu]</a> </li>";// <a href=\"$self?page=1\">[Trang đầu]</a>
+        }
+        else
+        {
+            $prev = '&nbsp;'; // dang o trang 1, khong can in lien ket trang truoc
+            $first = '&nbsp;'; // va lien ket trang dau
+        }
+        if ($current_page < $maxPage)
+        {
+            $page = $current_page + 1;
+            $next = "<li class='page-item'><a class='page-link' href=\"$self?page=$page&theloai=$theloai\">[Trang kế]</a></li>";// <a href=\"$self?page=$page\">[Trang kế]</a>
+            $last = "<li class='page-item'><a class='page-link' href=\"$self?page=$maxPage&theloai=$theloai\">[Trang cuối]</a></li>";// <a href=\"$self?page=$maxPage\">[Trang cuối]</a>
         }
         else
         {
@@ -351,7 +389,7 @@ echo '
                                 <h6>Tác giả : '. $row['tacgia'].'</h6>
                             </div>
                             <div class="row">
-                                <h6>NXB:'. $row['nxb'].' </h6>
+                                <h6>NXB : '. $row['nxb'].' </h6>
                             </div>
                             <hr>
                             <div class="row">
