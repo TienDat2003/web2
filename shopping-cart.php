@@ -163,7 +163,7 @@ if (isset($_SESSION['cart'])){
                 </div>
                 <div class="col-3 d-flex justify-content-end">
 <?php
-             echo '<h5 id="total-price">'. $sum/1000 . '.000đ</h5>';
+            echo '<h5 id="total-price">'. $sum/1000 . '.000đ</h5>';
 
 ?>
                 </div>

@@ -2,6 +2,26 @@
 require '../DataProvider.php';
 session_start();
 ?>
+<?php
+if (isset($_GET['duyet']))
+{   
+    $sql = "UPDATE `donhang` SET `trangthai`='1' WHERE `madonhang`=".$_GET['duyet']."";
+    executeQuery($sql);
+    header("Location: donhang.php");
+}
+if (isset($_GET['daduyet']))
+{   
+    $sql = "UPDATE `donhang` SET `trangthai`='0' WHERE `madonhang`=".$_GET['daduyet']."";
+    executeQuery($sql);
+    header("Location: donhang.php");
+}
+?>
+<script>
+    document.getElementById('btnDaduyet').addEventListener('click', function(event) {
+        event.preventDefault();
+        this.setAttribute('disabled', 'disabled');
+    });
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,10 +144,10 @@ session_start();
                         <div class="col-1">
                             <h5>ID</h5>
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <h5>Địa chỉ giao hàng</h5>
                         </div>
-                        <div class="col-2">
+                        <div class="col-1">
                             <h5>Tên đăng nhập</h5>
                         </div>
                         <div class="col-2">
@@ -138,6 +158,9 @@ session_start();
                         </div>
                         <div class="col-1">
                             <h5>Chi tiết</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5>Trạng thái</h5>
                         </div>
                     </div>
                     <hr>
@@ -154,29 +177,34 @@ if ($_POST['diachi']!='0')
 }
 $result = executeQuery($sql);
 while ($row = $result -> fetch_array()){
-    echo '
-            <div class="row">
-            <div class="col-1">
-                <h5>'. $row['madonhang'] .'</h6>
-            </div>
-            <div class="col-4">
-                <h6>'. $row['diachi'] .'</h6>
-            </div>
-            <div class="col-2">
-                <h6>'. $row['tendangnhap'] .'</h6>
-            </div>
-            <div class="col-2">
-                <h6>'. $row['sodienthoai'] .'</h6>
-            </div>
-            <div class="col-2">
-                <h6>'. $row['ngay'] .'</h6>
-            </div>
-            <div class="col-1">
-                <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row["madonhang"] .'"><i class="ri-file-text-fill"></i></button>
-            </div>
-        </div>
-        <hr>
-    ';
+    echo'<div class="row">';
+    echo'<div class="col-1">';
+    echo'<h5>'. $row['madonhang'] .'</h6>';
+    echo'</div>';
+    echo'<div class="col-3">';
+    echo'<h6>'. $row['diachi'] .'</h6>';
+    echo'</div>';
+    echo'<div class="col-1">';
+    echo'<h6>'. $row['tendangnhap'] .'</h6>';
+    echo'</div>';
+    echo'<div class="col-2">';
+    echo'<h6>'. $row['sodienthoai'] .'</h6>';
+    echo'</div>';
+    echo'<div class="col-2">';
+    echo'<h6>'. $row['ngay'] .'</h6>';
+    echo'</div>';
+    echo'<div class="col-1">';
+    echo'<button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row["madonhang"] .'"><i class="ri-file-text-fill"></i></button>';
+    echo'</div>';
+    echo'<div class="col-2">';
+            if ($row["trangthai"]==0)
+            echo'<a href="./donhang.php?duyet='. $row["madonhang"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Đang chờ duyệt</button></a>';
+            if ($row["trangthai"]==1)
+            echo'<button type="button" class="btn btn-outline-danger btn-delete" id="btnDaduyet" disabled>Đã duyệt</button>';
+    echo'</div>';
+    echo'</div>';
+    echo'<hr>';
+    
 }
 
 ?>
