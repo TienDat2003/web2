@@ -17,10 +17,12 @@ if (isset($_GET['bokhoa']))
 
 if (isset($_POST['tendangnhap']))
 {   
-    $sql = "UPDATE `nguoidung` SET `tendangnhap`='" . $_POST['tendangnhapmoi'] . "', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" . $_POST['tendangnhap'] . "'";
+    $sql = "UPDATE `nguoidung` SET `tendangnhap`='" . $_POST['tendangnhapmoi'] . "
+    ', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" . $_POST['tendangnhap'] . "'";
     executeQuery($sql);
     header("Location: customer.php");
 }
+
 if (isset($_POST['tendangnhap1']))
 {   
     $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `trangThai`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','1')";

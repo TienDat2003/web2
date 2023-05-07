@@ -117,7 +117,7 @@ if (isset($_SESSION['cart'])){
         $result = executeQuery($sql);
         $row = $result -> fetch_array();
         echo '
-        <div class="small-middle-container" id="cart-child-${dem}" style="text-align: center;margin-bottom: 1rem">
+        <div class="small-middle-container" id="cart-child-'.$i.'" style="text-align: center;margin-bottom: 1rem">
             <div class="row">
                 <div class="col-1">
                     <button type="button" class="navbar-toggler delete">
@@ -335,6 +335,17 @@ if (isset($_SESSION['cart'])){
                     location.href = "login.php"
                 }
             })
+        let deleteBtn = document.querySelectorAll(".delete")
+        for (let i=0;i<deleteBtn.length;i++)
+        {
+            deleteBtn[i].addEventListener('click',function(){
+                document.getElementById("cart-child-"+i).innerHTML="";
+                let sumcart = document.getElementsByClassName("sum_cart")
+                for (let i=0;i<sumcart.length;i++)
+                    t = t + parseInt(sumcart[i].innerText)
+                total.innerText = t+".000đ"
+            })
+        }
     </script>
 </body>
 </html>
