@@ -1,3 +1,41 @@
+<?php
+session_start();
+// include"DataProvider.php"; 
+require 'DataProvider.php'
+$temp=0;
+if (isset($_POST['username']) && isset($_POST['password']))
+{
+    function validate ($data) 
+    {
+        $data = trim ($data);
+        $data = stripcslashes($data);
+        $data = htmlspecialchars($data);
+        return data;
+    }
+
+
+$username = validate ($_POST['username']);
+$pass = validate ($_POST['password'])
+
+$sql = "SELECT * FROM nguoidung WHERE tendangnhap='$username' AND matkhau = '$pass' AND vaitro='1'";
+
+$result =  mysqli_query($sql);
+
+if (mysqli_num_rows($result) === 1)
+{
+    $row = mysqli_fetch_assoc ($result); 
+        $_SESSION['user_name'] = $username; 
+        header ("Location: productList.php");
+        exit(); 
+}
+else 
+{
+    header ("Location: login.php");
+    $temp = 1;
+    exit();
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,11 +64,11 @@
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form>
+            <form action="admin.php" action="POST" >
                 <!-- Email input -->
                 <i class="ri-mail-fill">Tên đăng nhập</i>
                 <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control form-control-lg"
+                <input type="email" id="form3Example3" name="username" class="form-control form-control-lg"
                     placeholder="Nhập email hoặc số điện thoại" />
                 <label class="form-label" for="form3Example3"></label>
                 </div>
@@ -38,32 +76,26 @@
                 <!-- Password input -->
                 <i class="ri-lock-fill"> Mật khẩu</i>
                 <div class="form-outline mb-3">
-                <input type="password" id="form3Example4" class="form-control form-control-lg"
+                <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
                     placeholder="Nhập mật khẩu" />
                 <label class="form-label" for="form3Example4"></label>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg" id="js-login-button"
+                <button type="submit" class="btn btn-primary btn-lg" id="js-login-button"
                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng nhập</button>
-
-    
             </form>
             </div>
         </div>
         <!-- Right -->
         </div>
     </section>
+<?php
+if ($temp==1)
+echo '
     <script>
-        document.querySelector('#js-login-button').addEventListener('click',function(){
-            console.log(1)
-            if (document.querySelector('#form3Example3').value=='admin'&&document.querySelector('#form3Example4').value=='123'){
-                alert("Xin chào admin Minh");
-                window.location.href='./admin.php'
-    }
-            else
-                alert('Đăng nhập thất bại')
-        })
-    </script>
+        alert("Đăng nhập thất bại");
+    </script>';
+?>
     <!-- <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
 </body>
 </html>

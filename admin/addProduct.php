@@ -27,7 +27,11 @@ session_start();
 				"'0'," . 
 				"'" . $_FILES["image_url"]["name"] ."')";
                 $result=executeQuery($sql);
-}
+                } 
+                $username="admin";
+                if (isset($_SESSION['user'])) {
+                    $username = $_SESSION['user'];
+                }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,13 +63,16 @@ session_start();
         <div class="row">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark min-vh-100">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white position-fixed min-vh-100">
-                    <span class="fs-5 d-none d-sm-inline">Xin chào Minh</span>
+                <?php              
+    echo '
+                <span class="fs-5 d-none d-sm-inline">Xin chào '.$username.'</span>
+                ';
+?>
+                    
+                    
+                    
+                    
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li class="nav-item">
-                            <a href="admin.php" class="nav-link align-middle px-0">
-                                <i class="ri-home-fill"></i> <span class="ms-1 d-none d-sm-inline">Trang chủ</span>
-                            </a>
-                        </li>
                         <li>
                             <a href="./donhang.php" class="nav-link px-0 align-middle">
                                 <i class="ri-file-list-3-fill"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng</span></a>

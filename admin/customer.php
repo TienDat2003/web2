@@ -25,10 +25,14 @@ if (isset($_POST['tendangnhap']))
 
 if (isset($_POST['tendangnhap1']))
 {   
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `trangThai`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','1')";
+    $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `trangThai`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','1','" . $_POST['vaitro'] . ")";
     executeQuery($sql);
     header("Location: customer.php");
 }
+$username="admin";
+if (isset($_SESSION['user'])) {
+    $username = $_SESSION['user'];
+} 
 ?>
 
 
@@ -53,7 +57,6 @@ if (isset($_POST['tendangnhap1']))
             -moz-appearance: textfield;
         }
     </style>
-    
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <title>Document</title>
@@ -63,13 +66,12 @@ if (isset($_POST['tendangnhap1']))
         <div class="row">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 min-vh-100 bg-dark min-vh-100">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed">
-                    <span class="fs-5 d-none d-sm-inline">Xin chào Minh</span>
+                <?php              
+    echo '
+                <span class="fs-5 d-none d-sm-inline">Xin chào '.$username.'</span>
+                ';
+?>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li class="nav-item">
-                            <a href="admin.php" class="nav-link align-middle px-0">
-                                <i class="ri-home-fill"></i> <span class="ms-1 d-none d-sm-inline">Trang chủ</span>
-                            </a>
-                        </li>
                         <li>
                             <a href="./donhang.php" class="nav-link px-0 align-middle">
                                 <i class="ri-file-list-3-fill"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng</span></a>
@@ -146,11 +148,13 @@ while ($row = $result -> fetch_array())
         <div class="col-2" style="text-align:center;">
         <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row['tendangnhap'] .'">Sửa</button>&nbsp
                     ';
+    if (isset($_SESSION['user'])!=$row['tendangnhap']) {
     if ($row['trangThai']==1)
         echo '<a href="./customer.php?khoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Khóa</button></a>';
     else 
         echo '<a href="./customer.php?bokhoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Mở</button></a>';          
-    echo '
+    }
+        echo '
                     </div>
                 </div>
                 <hr>
@@ -246,9 +250,9 @@ while ($row = $result -> fetch_array()) {
                     <div class="row mb-3">
                         <label for="inputPassword2" class="col-sm-3 col-form-label">Vai trò:</label>
                         <div class="col-sm-9">
-                        <select name="select-type" class="form-select form-select-sm" id="select-bottom" style="width: 200px;margin-right: 14px;" aria-label=".form-select-sm example"> 
+                        <select name="vaitro" class="form-select form-select-sm" id="select-bottom" style="width: 200px;margin-right: 14px;" aria-label=".form-select-sm example"> 
                                   <option value="1" selected="selected">Người dùng</option>
-                                  <option value="0" selected="selected">Quản trị viên</option>
+                                  <option value="0">Quản trị viên</option>
                         </select> 
                         </div>
                     </div>
