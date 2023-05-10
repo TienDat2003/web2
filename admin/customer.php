@@ -105,11 +105,14 @@ if (isset($_POST['tendangnhap1']))
                     <div class="col-2" style="text-align:center;">
                         <h4>Tên Đăng Nhập</h4>
                     </div>
-                    <div class="col-4" style="text-align:center;">
+                    <div class="col-3" style="text-align:center;">
                         <h4> Email</h4>
                      </div>
                     <div class="col-3" style="text-align:center;">
                        <h4> Mật khẩu</h4>
+                    </div>
+                    <div class="col-2" style="text-align:center;">
+                       <h4> Vai trò</h4>
                     </div>
                     <div class="col-2" style="text-align:center;">
                         <h4>Chức năng</h4>
@@ -126,12 +129,20 @@ while ($row = $result -> fetch_array())
                     <div class="col-2" style="text-align:center;">
                         <h5>'.$row['tendangnhap'].'</h5>
                     </div>
-                    <div class="col-4" style="text-align:center;">
+                    <div class="col-3" style="text-align:center;">
                         <h5>'.$row['email'].'</h5>
                      </div>
                     <div class="col-3" style="text-align:center;">
                        <h5>***************</h5>
-                    </div>
+                    </div>';
+        if ($row['vaitro']==1)
+            echo '<div class="col-2" style="text-align:center;">
+            <h5>Quản trị viên</h5>
+         </div>';
+        else echo '<div class="col-2" style="text-align:center;">
+        <h5>Người dùng</h5>
+     </div>';
+        echo '
         <div class="col-2" style="text-align:center;">
         <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row['tendangnhap'] .'">Sửa</button>&nbsp
                     ';
@@ -145,7 +156,7 @@ while ($row = $result -> fetch_array())
                 <hr>
     ';
    }
-// Mệt thật chứ,cmn
+// :))))))))))))))))))))))))))))))))))))))))))))))))))
 ?>
 
 </div>
@@ -230,6 +241,15 @@ while ($row = $result -> fetch_array()) {
                         <label for="inputPassword2" class="col-sm-3 col-form-label">Nhập lại mật khẩu:</label>
                         <div class="col-sm-9">
                             <input type="password" class="form-control" id="inputPassword2">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword2" class="col-sm-3 col-form-label">Vai trò:</label>
+                        <div class="col-sm-9">
+                        <select name="select-type" class="form-select form-select-sm" id="select-bottom" style="width: 200px;margin-right: 14px;" aria-label=".form-select-sm example"> 
+                                  <option value="1" selected="selected">Người dùng</option>
+                                  <option value="0" selected="selected">Quản trị viên</option>
+                        </select> 
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" id="btn-confirm">Thêm</button>
