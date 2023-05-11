@@ -168,12 +168,13 @@ if (isset($_SESSION['user'])) {
                     <hr>
                     <div id="order-list">
 <?php
-$sql = "SELECT * FROM `donhang`";
-if (isset($_POST['tungay'])&&isset($_POST['denngay'])&&isset($_POST['tungay'])!=""&&isset($_POST['denngay'])!="") {
+$sql = "SELECT * FROM `donhang` WHERE 1";
+if (isset($_POST['tungay'])&&isset($_POST['denngay'])) {
 $fromDate = $_POST['tungay'];
 $toDate = $_POST['denngay'];
 // Câu truy vấn SQL để lọc đơn hàng theo khoảng thời gian giao hàng
-    $sql = "SELECT * FROM donhang WHERE ngay >= '$fromDate' AND ngay <= '$toDate'";
+if ($_POST['denngay']!=""&&$_POST['tungay']!="")
+    $sql .= "AND ngay >= '$fromDate' AND ngay <= '$toDate'";
 if ($_POST['diachi']!='0')
     $sql .= " AND `diachi` LIKE '%" . $_POST['diachi'] . "%'";
 }
