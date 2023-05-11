@@ -173,6 +173,6 @@
     </div>
     <!-- <script src="./js/main.js"></script> -->
     <!-- <script src="./js/cart.js"></script> -->
-    <script src="./js/donhangdadat.js"></script>
+    <!-- <script src="./js/donhangdadat.js"></script> -->
 </body>
 </html>

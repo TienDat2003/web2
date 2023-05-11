@@ -14,8 +14,8 @@ if (isset($_POST['username']) && isset($_POST['password']))
     }
 
 
-$username = validate ($_POST['username']);
-$pass = validate ($_POST['password'])
+$username = $_POST['username'];
+$pass = $_POST['password'];
 
 $sql = "SELECT * FROM nguoidung WHERE tendangnhap='$username' AND matkhau = '$pass' AND vaitro='1'";
 
@@ -24,7 +24,7 @@ $result =  mysqli_query($sql);
 if (mysqli_num_rows($result) === 1)
 {
     $row = mysqli_fetch_assoc ($result); 
-        $_SESSION['user_name'] = $username; 
+        $_SESSION['user'] = $username; 
         header ("Location: productList.php");
         exit(); 
 }
@@ -94,6 +94,11 @@ if ($temp==1)
 echo '
     <script>
         alert("Đăng nhập thất bại");
+    </script>';
+else
+echo '
+    <script>
+        alert("Đăng nhập thành công");
     </script>';
 ?>
     <!-- <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->

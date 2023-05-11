@@ -1,6 +1,14 @@
 <?php
 require 'DataProvider.php';
 session_start();
+
+if (isset($_POST("name"))){
+    $sql = "SELECT COUNT(*) AS numrows FROM sach";
+    $result =  mysqli_query($sql);
+    $id = mysqli_num_rows($result);
+    $sql = "INSERT INTO `donhang`(`madonhang`, `ngay`, `tendangnhap`, `diachi`, `trangthai`, `sodienthoai`) VALUES 
+    ('" . $id . "','" . $_POST[''] . "','" . $_POST['name'] . "','". $_POST['diachi'] ."','0','". $_POST['sodienthoai'] ."')";
+}
 ?>
 
 
@@ -251,21 +259,21 @@ if (isset($_SESSION['cart'])){
         
                 <!-- Modal body -->
                 <div class="modal-body" id="modal-pay">
-                <form>
+                <form method="POST">
             <div class="row">
                 <label for="inputImg" class="col-sm-3 col-form-label">Tên khách hàng:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="customer-name">
+                    <input type="text" class="form-control" id="customer-name" name="name">
                 </div>
             </div>
             <div class="row">
                 <label for="inputImg" class="col-sm-3 col-form-label">Số điện thoại:</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control" id="phone-number">
+                    <input type="number" class="form-control" id="phone-number" name="sodienthoai">
                 </div>
             </div>
             <div class="form-check" id = "address">
-                <h3 for="inputImg" class="col-form-label">Địa chỉ giao hàng:</h3>
+                <h3 for="inputImg" class="col-form-label" name="diachi">Địa chỉ giao hàng:</h3>
                 <input type="text" size="40">
                 <br>
             </div>
@@ -285,7 +293,7 @@ if (isset($_SESSION['cart'])){
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger confirm-button" data-bs-dismiss="modal">Xác nhận</button>
+                    <button type="submit" class="btn btn-danger confirm-button" data-bs-dismiss="modal">Xác nhận</button>
                 </div>
             </div>
         </div>
