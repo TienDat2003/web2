@@ -1,7 +1,7 @@
 <?php
 session_start();
 // include"DataProvider.php"; 
-require 'DataProvider.php'
+require 'DataProvider.php';
 $temp=0;
 if (isset($_POST['username']) && isset($_POST['password']))
 {
