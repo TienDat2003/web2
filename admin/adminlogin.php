@@ -1,7 +1,7 @@
 <?php
 session_start();
 // include"DataProvider.php"; 
-require 'DataProvider.php';
+require '../DataProvider.php';
 $temp=0;
 if (isset($_POST['username']) && isset($_POST['password']))
 {
@@ -19,9 +19,10 @@ $pass = $_POST['password'];
 
 $sql = "SELECT * FROM nguoidung WHERE tendangnhap='$username' AND matkhau = '$pass' AND vaitro='1'";
 
-$result =  mysqli_query($sql);
+$result = executeQuery($sql);
 
-if (mysqli_num_rows($result) === 1)
+
+if (!empty($result))
 {
     $row = mysqli_fetch_assoc ($result); 
         $_SESSION['user'] = $username; 
@@ -64,11 +65,11 @@ else
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form action="POST" >
+            <form method="POST" >
                 <!-- Email input -->
                 <i class="ri-mail-fill">Tên đăng nhập</i>
                 <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" name="username" class="form-control form-control-lg"
+                <input type="text" id="form3Example3" name="username" class="form-control form-control-lg"
                     placeholder="Nhập email hoặc số điện thoại" />
                 <label class="form-label" for="form3Example3"></label>
                 </div>
@@ -90,16 +91,6 @@ else
         </div>
     </section>
 <?php
-if ($temp==1)
-echo '
-    <script>
-        alert("Đăng nhập thất bại");
-    </script>';
-else
-echo '
-    <script>
-        alert("Đăng nhập thành công");
-    </script>';
 ?>
     <!-- <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
 </body>
