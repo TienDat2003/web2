@@ -2,9 +2,10 @@
 session_start();
 // include"DataProvider.php"; 
 require '../DataProvider.php';
-$temp=0;
+$temp=-1;
 if (isset($_POST['username']) && isset($_POST['password']))
 {
+    $temp=0;
     function validate ($data) 
     {
         $data = trim ($data);
@@ -17,23 +18,21 @@ if (isset($_POST['username']) && isset($_POST['password']))
 $username = $_POST['username'];
 $pass = $_POST['password'];
 
-$sql = "SELECT * FROM nguoidung WHERE tendangnhap='$username' AND matkhau = '$pass' AND vaitro='1'";
+$sql = "SELECT * FROM nguoidung WHERE tendangnhap='$username' AND matkhau = '$pass' AND vaitro='1'  AND trangThai='1'";
 
 $result = executeQuery($sql);
 
 
-if (!empty($result))
+if ($row = $result -> fetch_array())
 {
-    $row = mysqli_fetch_assoc ($result); 
+    $temp=1;
         $_SESSION['user'] = $username; 
         header ("Location: productList.php");
         exit(); 
 }
 else 
-{
-    header ("Location: login.php");
-    $temp = 1;
-    exit();
+{   
+    header ("Location: adminlogin.php");
 }
 }
 ?>
@@ -91,6 +90,7 @@ else
         </div>
     </section>
 <?php
+
 ?>
     <!-- <script src="./bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
 </body>
