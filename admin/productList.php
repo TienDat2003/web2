@@ -6,13 +6,13 @@ session_start();
 <?php
 if (isset($_GET['an']))
 {   
-    $sql = "UPDATE `sach` SET `trangthai`='-1' WHERE `masach`=".$_GET['an']."";
+    $sql = "UPDATE `sach` SET `bian`='1' WHERE `masach`=".$_GET['an']."";
     executeQuery($sql);
     header("Location: productList.php");
 }
 if (isset($_GET['boan']))
 {   
-    $sql = "UPDATE `sach` SET `trangthai`='1' WHERE `masach`=".$_GET['boan']."";
+    $sql = "UPDATE `sach` SET `bian`='0' WHERE `masach`=".$_GET['boan']."";
     executeQuery($sql);
     header("Location: productList.php");
 }
@@ -210,12 +210,14 @@ while ($row = $result -> fetch_array())
             // echo '</div>';
             echo '<div class="col-2">';
             echo '<button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row["masach"] .'">Sửa</button>&nbsp';
-            if ($row["trangthai"]==1)
-                echo '<a href="./productList.php?an='. $row["masach"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Ẩn</button></a>';
-            if ($row["trangthai"]==0)
+            if ($row["daduocban"]==1){
+                if ($row["bian"]==0)
+                    echo '<a href="./productList.php?an='. $row["masach"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Ẩn</button></a>';
+                if ($row["bian"]==1)
+                    echo '<a href="./productList.php?boan='. $row["masach"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Bỏ ẩn</button></a>';
+                }
+            else
                 echo '<button type="button" class="btn btn-outline-danger btn-delete" data-bs-toggle="modal" data-bs-target="#myModal-delete'. $row["masach"] .'">Xóa</button>';
-            if ($row["trangthai"]==-1)
-                echo '<a href="./productList.php?boan='. $row["masach"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Bỏ ẩn</button></a>';
             echo '</div>';
             echo '</div>';
 echo '
@@ -251,11 +253,12 @@ $sql = "SELECT * FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER 
         // kiểm tra xem form có được submit hay chưa
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             // lấy giá trị của select và lưu vào biến
-            $loai = $_GET['loai'];
+            
             // xử lý dữ liệu tương ứng với giá trị lấy được
-            if ($loai == 0) {
+            if (!isset($_GET['loai'])) {
                 $sql = "SELECT * FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai ORDER BY s.masach ASC";
             } else {
+                $loai = $_GET['loai'];
             // ...xử lý khi chọn giá trị khác 0
                 $sql = "SELECT * FROM sach s INNER JOIN loaisach l ON s.maloai = l.maloai WHERE s.maloai = " . $loai;
             }

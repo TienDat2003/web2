@@ -5,13 +5,13 @@ session_start();
 <?php
 if (isset($_GET['duyet']))
 {   
-    $sql = "UPDATE `donhang` SET `trangthai`='1' WHERE `madonhang`=".$_GET['duyet']."";
+    $sql = "UPDATE `donhang` SET `daduyet`='1' WHERE `madonhang`=".$_GET['duyet']."";
     executeQuery($sql);
     header("Location: donhang.php");
 }
 if (isset($_GET['daduyet']))
 {   
-    $sql = "UPDATE `donhang` SET `trangthai`='0' WHERE `madonhang`=".$_GET['daduyet']."";
+    $sql = "UPDATE `donhang` SET `daduyet`='0' WHERE `madonhang`=".$_GET['daduyet']."";
     executeQuery($sql);
     header("Location: donhang.php");
 }
@@ -74,7 +74,7 @@ if (isset($_SESSION['user'])) {
                 </div>
             </div>
             
-            <div class="box container py-5" style="width:1000px;text-align: center; border-collapse: separate; border-radius: 15px;">
+            <div class="box container-fluid py-5" style="width:1250px;text-align: center; border-collapse: separate; border-radius: 15px;">
             <div class="row">
                     <div class="col-6">
                         <h3 style="text-align: left;">Lọc đơn hàng: </h3>
@@ -144,25 +144,28 @@ if (isset($_SESSION['user'])) {
                 <div class="container">
                     <div class="row">
                         <div class="col-1">
-                            <h5>ID</h5>
+                            <h6>Mã đơn hàng</h6>
                         </div>
                         <div class="col-3">
-                            <h5>Địa chỉ giao hàng</h5>
+                            <h6>Địa chỉ giao hàng</h6>
                         </div>
                         <div class="col-1">
-                            <h5>Tên đăng nhập</h5>
-                        </div>
-                        <div class="col-2">
-                            <h5>Số điện thoại</h5>
-                        </div>
-                        <div class="col-2">
-                            <h5>Ngày đặt</h5>
+                            <h6>Tên đăng nhập</h6>
                         </div>
                         <div class="col-1">
-                            <h5>Chi tiết</h5>
+                            <h6>Số điện thoại</h6>
                         </div>
                         <div class="col-2">
-                            <h5>Trạng thái</h5>
+                            <h6>Ngày đặt</h6>
+                        </div>
+                        <div class="col-1">
+                            <h6>Thanh toán</h6>
+                        </div>
+                        <div class="col-1">
+                            <h6>Chi tiết</h6>
+                        </div>
+                        <div class="col-1">
+                            <h6>Trạng thái</h6>
                         </div>
                     </div>
                     <hr>
@@ -182,7 +185,7 @@ $result = executeQuery($sql);
 while ($row = $result -> fetch_array()){
     echo'<div class="row">';
     echo'<div class="col-1">';
-    echo'<h5>'. $row['madonhang'] .'</h6>';
+    echo'<h6>'. $row['madonhang'] .'</h6>';
     echo'</div>';
     echo'<div class="col-3">';
     echo'<h6>'. $row['diachi'] .'</h6>';
@@ -190,19 +193,22 @@ while ($row = $result -> fetch_array()){
     echo'<div class="col-1">';
     echo'<h6>'. $row['tendangnhap'] .'</h6>';
     echo'</div>';
-    echo'<div class="col-2">';
+    echo'<div class="col-1">';
     echo'<h6>'. $row['sodienthoai'] .'</h6>';
     echo'</div>';
     echo'<div class="col-2">';
     echo'<h6>'. $row['ngay'] .'</h6>';
     echo'</div>';
     echo'<div class="col-1">';
+    echo'<h6>'. $row['thanhtoan'] .'</h6>';
+    echo'</div>';
+    echo'<div class="col-1">';
     echo'<button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row["madonhang"] .'"><i class="ri-file-text-fill"></i></button>';
     echo'</div>';
-    echo'<div class="col-2">';
-            if ($row["trangthai"]==0)
-            echo'<a href="./donhang.php?duyet='. $row["madonhang"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Đang chờ duyệt</button></a>';
-            if ($row["trangthai"]==1)
+    echo'<div class="col-1">';
+            if ($row["daduyet"]==0)
+            echo'<a href="./donhang.php?duyet='. $row["madonhang"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Chờ duyệt</button></a>';
+            if ($row["daduyet"]==1)
             echo'<button type="button" class="btn btn-outline-danger btn-delete" id="btnDaduyet" disabled>Đã duyệt</button>';
     echo'</div>';
     echo'</div>';
@@ -217,7 +223,7 @@ while ($row = $result -> fetch_array()){
                 </div>
                 
                 <!-- <div class="total-price" style="width:650px">
-                    <h5 style="margin-left: 630px;width: 100px;margin: right 0px;">Total:</h5>
+                    <6 style="margin-left: 630px;width: 100px;margin: right 0px;">Total:</h5>
                 </div> -->
             </div>
             

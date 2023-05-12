@@ -25,7 +25,7 @@ require 'DataProvider.php';
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $passWord = md5($_POST['password']);
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `trangThai`,`vaitro`) VALUES ('" . $_POST['name'] . "','" . $passWord . "','" . $_POST['email'] . "','1','0')";
+    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `bikhoa`,`vaitro`) VALUES ('" . $_POST['name'] . "','" . $passWord . "','" . $_POST['email'] . "','0','nguoidung')";
     $result = executeQuery($sql);
 }
 // Kết nối tới cơ sở dữ liệu (thay đổi thông tin kết nối tương ứng với hệ thống của bạn)
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 // Truy vấn kiểm tra tên đăng nhập và mật khẩu trong cơ sở dữ liệu
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'])){
     $passWord = md5($_POST['password']);
-$sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['username']."' AND matkhau='".$passWord."' AND trangThai='1' AND vaitro='0'";
+$sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['username']."' AND matkhau='".$passWord."' AND bikhoa='0' AND vaitro='nguoidung'";
 $result = executeQuery($sql);
 
 if ( $result -> fetch_array()) {

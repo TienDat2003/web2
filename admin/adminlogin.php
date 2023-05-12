@@ -5,34 +5,25 @@ require '../DataProvider.php';
 $temp=-1;
 if (isset($_POST['username']) && isset($_POST['password']))
 {
-    $temp=0;
-    function validate ($data) 
-    {
-        $data = trim ($data);
-        $data = stripcslashes($data);
-        $data = htmlspecialchars($data);
-        return data;
-    }
-
-
+    
 $username = $_POST['username'];
-$pass = $_POST['password'];
+$pass = md5($_POST['password']);
 
-$sql = "SELECT * FROM nguoidung WHERE tendangnhap='$username' AND matkhau = '$pass' AND vaitro='1'  AND trangThai='1'";
+$sql = "SELECT * FROM nguoidung WHERE tendangnhap='$username' AND matkhau = '$pass' AND vaitro = 'quantrivien'  AND bikhoa='0'";
 
 $result = executeQuery($sql);
-
-
-if ($row = $result -> fetch_array())
+if ( $result -> fetch_array())
 {
-    $temp=1;
         $_SESSION['user'] = $username; 
-        header ("Location: productList.php");
+        header ("Location: donhang.php");
         exit(); 
 }
 else 
-{   
-    header ("Location: adminlogin.php");
+{   echo "
+    <script>
+        alert('Đăng nhập thất bại. Vui lòng kiểm tra lại tên đăng nhập và mật khẩu.')
+    </script>
+    ";
 }
 }
 ?>

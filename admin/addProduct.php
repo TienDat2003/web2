@@ -16,7 +16,7 @@ session_start();
 		move_uploaded_file($tmp_name, $fldimageurl);
 		// echo($fldimageurl);
 		// echo($_FILES["image_url"]["name"]);
-		$sql = "INSERT INTO `sach`(`masach`, `tensach`, `maloai`, `gia`, `nxb`, `tacgia`, `mota`, `trangthai`, `anh`) VALUES (" .
+		$sql = "INSERT INTO `sach`(`masach`, `tensach`, `maloai`, `gia`, `nxb`, `tacgia`, `mota`, `bian`, `anh`,`daduocban`) VALUES (" .
 				"'" . $numrows . "'," . 
 				"'" . $_POST['ten'] . "'," . 
 				"'" . $_POST['gridRadios'] . "'," . 
@@ -25,6 +25,7 @@ session_start();
 				"'" . $_POST['tacgia'] . "'," . 
 				"'" . $_POST['mota'] . "'," . 
 				"'0'," . 
+                "'0'," . 
 				"'" . $_FILES["image_url"]["name"] ."')";
                 $result=executeQuery($sql);
                 } 

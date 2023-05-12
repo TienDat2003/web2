@@ -156,8 +156,8 @@ while ($row = $result -> fetch_array())
                 <div class="d-flex justify-content-center row" id="card-list">
                     <h2 class="text-center mt-3 pt-3" id="list-item-1">Danh sách sản phẩm</h2> ';
 $per_page = 9;//số lượng sản phẩm 1 trangx
-$sql = "SELECT * FROM sach WHERE `trangthai`!=-1";
-$sql1 = " AND `trangthai`!=-1";
+$sql = "SELECT * FROM sach WHERE `bian`=0";
+$sql1 = " AND `bian`=0";
 $temp=0;
 $name="";
 if (isset($_GET['theloai']))
@@ -233,7 +233,7 @@ while ($row = $result -> fetch_array()) {
 echo '
                 </div>
             </div>';
-$sql = "SELECT COUNT(*) AS numrows FROM sach WHERE `trangthai`!=-1";
+$sql = "SELECT COUNT(*) AS numrows FROM sach WHERE `bian`=0";
 $sql .= $sql1;
 $result = executeQuery($sql);
 // echo $sql;
@@ -361,7 +361,7 @@ if ($maxPage>1) {
     }
 }
 
-$sql = "SELECT * FROM sach WHERE `trangthai`!=-1";
+$sql = "SELECT * FROM sach WHERE `bian`=0";
 $result = executeQuery($sql);
 $i=0;
 while ($row = $result -> fetch_array()){

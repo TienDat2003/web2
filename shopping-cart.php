@@ -1,8 +1,9 @@
 <?php
 require 'DataProvider.php';
 session_start();
-
-if (isset($_POST("name"))){
+?>
+<?php
+if (isset($_POST['name'])){
     $sql = "SELECT COUNT(*) AS numrows FROM sach";
     $result =  mysqli_query($sql);
     $id = mysqli_num_rows($result);

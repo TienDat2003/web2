@@ -4,13 +4,13 @@ session_start();
 
 if (isset($_GET['khoa']))
 {   
-    $sql = "UPDATE `nguoidung` SET `trangthai`='0' WHERE `tendangnhap`='".$_GET['khoa']."'";
+    $sql = "UPDATE `nguoidung` SET `bikhoa`='1' WHERE `tendangnhap`='".$_GET['khoa']."'";
     executeQuery($sql);
     header("Location: customer.php");
 }
 if (isset($_GET['bokhoa']))
 {   
-    $sql = "UPDATE `nguoidung` SET `trangthai`='1' WHERE `tendangnhap`='".$_GET['bokhoa']."'";
+    $sql = "UPDATE `nguoidung` SET `bikhoa`='0' WHERE `tendangnhap`='".$_GET['bokhoa']."'";
     executeQuery($sql);
     header("Location: customer.php");
 }
@@ -25,7 +25,7 @@ if (isset($_POST['tendangnhap']))
 
 if (isset($_POST['tendangnhap1']))
 {   
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `trangThai`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','1','" . $_POST['vaitro'] . ")";
+    $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','0','" . $_POST['vaitro'] . ")";
     executeQuery($sql);
     header("Location: customer.php");
 }
@@ -148,11 +148,11 @@ while ($row = $result -> fetch_array())
         <div class="col-2" style="text-align:center;">
         <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row['tendangnhap'] .'">Sửa</button>&nbsp
                     ';
-    if (isset($_SESSION['user'])!=$row['tendangnhap']) {
-    if ($row['trangThai']==1)
-        echo '<a href="./customer.php?khoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Khóa</button></a>';
-    else 
-        echo '<a href="./customer.php?bokhoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Mở</button></a>';          
+    if ($_SESSION['user']!=$row['tendangnhap']) {
+        if ($row['bikhoa']==0)
+            echo '<a href="./customer.php?khoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Khóa</button></a>';
+        else 
+            echo '<a href="./customer.php?bokhoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Mở</button></a>';          
     }
         echo '
                     </div>
@@ -251,8 +251,8 @@ while ($row = $result -> fetch_array()) {
                         <label for="inputPassword2" class="col-sm-3 col-form-label">Vai trò:</label>
                         <div class="col-sm-9">
                         <select name="vaitro" class="form-select form-select-sm" id="select-bottom" style="width: 200px;margin-right: 14px;" aria-label=".form-select-sm example"> 
-                                  <option value="1" selected="selected">Người dùng</option>
-                                  <option value="0">Quản trị viên</option>
+                                  <option value="nguoidung" selected="selected">Người dùng</option>
+                                  <option value="quantrivien">Quản trị viên</option>
                         </select> 
                         </div>
                     </div>
