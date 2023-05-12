@@ -16,7 +16,7 @@ session_start();
 		move_uploaded_file($tmp_name, $fldimageurl);
 		// echo($fldimageurl);
 		// echo($_FILES["image_url"]["name"]);
-		$sql = "INSERT INTO `sach`(`masach`, `tensach`, `maloai`, `gia`, `nxb`, `tacgia`, `mota`, `bian`, `anh`,`daduocban`) VALUES (" .
+		$sql = "INSERT INTO `sach`(`masach`, `tensach`, `maloai`, `gia`, `nxb`, `tacgia`, `mota`, `bian`,`daduocban`, `anh`) VALUES (" .
 				"'" . $numrows . "'," . 
 				"'" . $_POST['ten'] . "'," . 
 				"'" . $_POST['gridRadios'] . "'," . 

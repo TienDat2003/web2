@@ -4,11 +4,20 @@ session_start();
 ?>
 <?php
 if (isset($_POST['name'])){
+    if (isset($_SESSION['cart'])){
+        echo '
+        <script>
+            alert("Giỏ hàng rỗng!!!");
+        </script>
+        ';
+    }
+    else {
     $sql = "SELECT COUNT(*) AS numrows FROM sach";
     $result =  mysqli_query($sql);
     $id = mysqli_num_rows($result);
     $sql = "INSERT INTO `donhang`(`madonhang`, `ngay`, `tendangnhap`, `diachi`, `trangthai`, `sodienthoai`) VALUES 
     ('" . $id . "','" . $_POST[''] . "','" . $_POST['name'] . "','". $_POST['diachi'] ."','0','". $_POST['sodienthoai'] ."')";
+}
 }
 ?>
 

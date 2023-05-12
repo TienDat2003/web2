@@ -164,7 +164,7 @@ if (isset($_SESSION['user'])) {
                         <div class="col-1">
                             <h6>Chi tiết</h6>
                         </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             <h6>Trạng thái</h6>
                         </div>
                     </div>
@@ -205,7 +205,7 @@ while ($row = $result -> fetch_array()){
     echo'<div class="col-1">';
     echo'<button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row["madonhang"] .'"><i class="ri-file-text-fill"></i></button>';
     echo'</div>';
-    echo'<div class="col-1">';
+    echo'<div class="col-2">';
             if ($row["daduyet"]==0)
             echo'<a href="./donhang.php?duyet='. $row["madonhang"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Chờ duyệt</button></a>';
             if ($row["daduyet"]==1)
