@@ -64,7 +64,7 @@ else
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form action="admin.php" action="POST" >
+            <form action="POST" >
                 <!-- Email input -->
                 <i class="ri-mail-fill">Tên đăng nhập</i>
                 <div class="form-outline mb-4">
