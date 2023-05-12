@@ -24,7 +24,8 @@ require 'DataProvider.php';
 <!-- Đăng ký -->
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `trangThai`,`vaitro`) VALUES ('" . $_POST['name'] . "','" . $_POST['password'] . "','" . $_POST['email'] . "','1','0')";
+    $passWord = md5($_POST['password']);
+    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `trangThai`,`vaitro`) VALUES ('" . $_POST['name'] . "','" . $passWord . "','" . $_POST['email'] . "','1','0')";
     $result = executeQuery($sql);
 }
 // Kết nối tới cơ sở dữ liệu (thay đổi thông tin kết nối tương ứng với hệ thống của bạn)
@@ -32,7 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
 // Truy vấn kiểm tra tên đăng nhập và mật khẩu trong cơ sở dữ liệu
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'])){
-$sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['username']."' AND matkhau='".$_POST['password']."' AND trangThai='1' AND vaitro='0'";
+    $passWord = md5($_POST['password']);
+$sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['username']."' AND matkhau='".$passWord."' AND trangThai='1' AND vaitro='0'";
 $result = executeQuery($sql);
 
 if ( $result -> fetch_array()) {
