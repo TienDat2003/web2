@@ -304,7 +304,14 @@ $row = $result -> fetch_array();
             <div class="row">
                 <label for="inputImg" class="col-sm-3 col-form-label">Địa chỉ giao hàng:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="address" name="diachi">
+<?php
+$sql = "SELECT * FROM donhang WHERE tendangnhap = '".$_SESSION['user']."'";
+$result = executeQuery($sql);
+if ($row = $result -> fetch_array())
+    echo '<input type="text" class="form-control" id="address" name="diachi" value="'.$row['diachi'].'">';
+else
+    echo '<input type="text" class="form-control" id="address" name="diachi">';
+?>    
                 </div>
             </div>
             <div class="row">
