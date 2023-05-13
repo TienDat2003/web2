@@ -366,8 +366,7 @@ else
                 break;
             }
             }
-
-            if (!address.value || !phone.value || isChecked) {
+            if (address.value=="" || phone.value=="" || !isChecked) {
                 alert("Vui lòng nhập đầy đủ thông tin");
                 return false;
             }

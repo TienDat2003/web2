@@ -212,7 +212,7 @@ while ($row = $result -> fetch_array()) {
                     <div class="col-auto col-md-3 col-xl-3 px-sm-6 px-2"  style="margin-left: 15em;">
                         <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2">            
                             <form style="width: 40rem;" method="POST">
-                            <input type="text" class="form-control"  style="display: none;" name="tendangnhap" id="inputName" value="'. $row['tendangnhap'] .'">
+                            <input type="text" class="form-control"  style="display: none;" name="tendangnhap" id="inputName" value="'.$row['tendangnhap'].'">
                             <div class="row mb-3">
                                 <label for="inputName" class="col-sm-3 col-form-label">Tên đăng nhập:</label>
                                 <div class="col-sm-9">
