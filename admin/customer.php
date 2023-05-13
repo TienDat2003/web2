@@ -137,7 +137,7 @@ while ($row = $result -> fetch_array())
                     <div class="col-3" style="text-align:center;">
                        <h5>***************</h5>
                     </div>';
-        if ($row['vaitro']==1)
+        if ($row['vaitro']!="nguoidung")
             echo '<div class="col-2" style="text-align:center;">
             <h5>Quản trị viên</h5>
          </div>';
