@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2023 at 04:11 PM
+-- Generation Time: May 13, 2023 at 02:48 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,36 +38,33 @@ CREATE TABLE `chitietdonhang` (
 --
 
 INSERT INTO `chitietdonhang` (`madonhang`, `masach`, `soluong`) VALUES
-(1, 1, 1),
-(1, 2, 1),
+(1, 1, 2),
+(2, 1, 2),
+(3, 1, 1),
+(4, 1, 3),
+(1, 2, 2),
 (1, 3, 1),
-(1, 4, 1),
+(1, 4, 3),
 (1, 5, 1),
 (1, 6, 1),
 (2, 7, 1),
 (2, 8, 1),
 (2, 9, 1),
 (2, 10, 1),
-(3, 11, 1),
-(3, 12, 1),
+(2, 11, 1),
+(2, 12, 1),
 (3, 13, 1),
 (3, 14, 1),
 (3, 15, 1),
 (3, 16, 1),
 (3, 17, 1),
-(3, 18, 1),
-(3, 19, 1),
+(4, 18, 1),
+(4, 19, 1),
 (4, 20, 1),
 (4, 21, 1),
 (4, 22, 1),
 (4, 23, 1),
-(4, 24, 1),
-(4, 25, 1),
-(4, 26, 1),
-(4, 27, 1),
-(4, 28, 1),
-(4, 29, 1),
-(4, 30, 1);
+(4, 24, 1);
 
 -- --------------------------------------------------------
 
@@ -191,12 +188,12 @@ INSERT INTO `sach` (`masach`, `tensach`, `maloai`, `gia`, `nxb`, `tacgia`, `mota
 (22, 'Thiên Tài Bên Trái, Kẻ Điên Bên Phải', 4, 179000, 'Nhà Xuất Bản Thế Giới', 'Cao Minh', '\"Thiên tài bên trái, kẻ điên bên phải\" là cuốn sách dành cho những người điên rồ, những kẻ gây rối, những người chống đối, những mảnh ghép hình tròn trong những ô vuông không vừa vặn… những người nhìn mọi thứ khác biệt, không quan tâm đến quy tắc. Bạn có thể đồng ý, có thể phản đối, có thể vinh danh hay lăng mạ họ, nhưng điều duy nhất bạn không thể làm là phủ nhận sự tồn tại của họ. Đó là những người luôn tạo ra sự thay đổi trong khi hầu hết con người chỉ sống rập khuôn như một cái máy. Đa số đều nghĩ họ thật điên rồ nhưng nếu nhìn ở góc khác, ta lại thấy họ thiên tài. Bởi chỉ những người đủ điên nghĩ rằng họ có thể thay đổi thế giới mới là những người làm được điều đó. Chào mừng đến với thế giới của những kẻ điên.', 0, '22.png', 1),
 (23, 'Chắc Gì Ta Đã Yêu Nhau', 4, 88000, 'Nhà Xuất Bản Phụ Nữ', 'Minh Nhật', 'Ngày ấy… người có yêu ta? Cuộc đời này, có những khoảng trống sinh ra không phải để lấp đầy, giống như em trong những ngày hanh hao đột nhiên thấy lòng mình hoài nghi nhiều. Như Lê Cát Trọng Lý từng gọi nó là những “hoang mang cần thiết” em cần có để biết trái tim còn biết rung động, biết đau và biết yêu. Nếu có những ngày trong đời, lòng em băn khoăn điều ấy, thì cuốn tản văn của Minh Nhật – CHẮC GÌ TA ĐÃ YÊU NHAU sẽ giúp em tìm được đáp án cho những khúc mắc mà bấy lâu em vẫn giữ riêng mình.', 0, '23.png', 1),
 (24, 'Lắng Nghe Gió Hát', 4, 75000, 'Nhà Xuất Bản Hội Nhà Văn', 'Haruki Murakami', 'Mười tám ngày của mùa hè năm hai mươi tuổi, đối với \"tôi\" là một kỳ nghỉ hè không sự kiện. Bất chấp những tối uống tràn ở quán Jays Bar cùng cậu bạn mang tên Chuột hay mối quen tình cờ với cô gái ở cửa hàng đĩa hát, thành phố quê hương ven biển mùa hè chỉ còn là gió trong \"tôi\". Nhưng chuyển kể về gió, tiếng gió hát bên bờ biển, và cảm giác tuổi thanh xuân trôi qua như gió. Mười tám ngày ấy đã gói ghém cả quá khứ, hiện tại, tương lai cùng với hoang mang, mất mát và cô đơn...', 0, '24.png', 1),
-(25, 'Những Nỗi Sợ Sâu Thẳm', 4, 109000, 'Nhà Xuất Bản Hà Nội', 'Fran Krause', 'Ai trong chúng ta cũng có những nỗi ám ảnh. Họa sĩ truyện tranh Fran Krause đã dùng ý tưởng của bản thân và thu thập chia sẻ của độc giả khắp thế giới để tạo nên Deep dark fears - một tuyển tập minh họa những nỗi sợ sâu kín của con người - từng làm mưa làm gió trên mạng. Bạn sẽ tìm thấy trong tuyển tập này những nỗi sợ quen thuộc như nhìn thấy ma trong gương phòng ngủ, bị hút vào thang cuốn ở trung tâm thương mại,… cho đến những nỗi sợ kỳ quặc như sợ kiến làm tổ trong đầu khi ngậm kẹo mút đi ngủ, sợ tự tháo tung chính mình khi nhổ một sợi tóc, sợ thức giấc và nhận ra mình chỉ là một chú chó,… Và cả những nỗi sợ hài hước kiểu như: “Đôi khi trong lúc đi ị, tôi sợ rằng đấy chỉ là MỘT GIẤC MƠ. Và thực tế là tôi đang ị đùn ở đâu đó.” Nét minh họa sống động của Fran Krause cùng những tình huống rùng rợn trong mỗi trang sách sẽ dẫn bạn đi từ phen hú hồn này đến pha thót tim khác, và không ngừng kích thích óc tưởng tượng của bạn. Chúc bạn có những trải-nghiệm-để-đời với NHỮNG NỖI SỢ SÂU THẲM!', 0, '25.png', 1),
-(26, 'Đời Nhẹ Khôn Kham', 4, 129000, 'Nhà Xuất Bản Hội Nhà Văn', 'Milan Kundera', 'Trong Đời nhẹ khôn kham, sự biến mất cái tôi cá nhân không phải do máy móc kỹ thuật mà do nhà nước chuyên chế. Nhân vật Jan Prochazka và giáo sư Vaclav Cerny chơi thân với nhau, nhưng họ không thể ngờ rằng tất cả cuộc trò chuyện trong bàn tiệc đều được bí mật ghi âm lại. Vào năm 1970 hay 1971, muốn làm mất uy tín của Prochazka, cảnh sát cho phát những cuộc nói chuyện ấy trên đài phát thanh.', 0, '26.png', 1),
-(27, 'Bụi Sao', 1, 119000, 'Nhà Xuất Bản Hà Nội', 'Neil Gaiman', 'Đến tuổi cập kê, Tristran Thorn đem lòng si mê một thiếu nữ xinh đẹp trong ngôi làng Bức Tường nơi anh lớn lên. Vì lời hứa sẽ cùng cô sánh vai trong thánh đường, chàng trai trẻ khăn gói lên đường tiến vào Xứ Tiên để tìm một ngôi sao băng từ trên trời rơi xuống. Chuyến phiêu lưu ở xứ sở kỳ lạ, rùng rợn mà đầy nhiệm màu đã xoay chuyển con người và thế giới quan của Tristran theo những cách anh chưa từng ngờ đến, biến anh thành một người hùng chân chính trong câu chuyện của mình. Cổ quái và nhân văn, đen tối và giàu cảm xúc, Bụi sao đem đến vô khối những câu chuyện chưa kể đằng sau cuộc hành trình tầm mộng của một vị anh hùng trẻ tuổi, cốt để chứng tỏ rằng chuyện thần tiên thực chất cũng dành cho người lớn.', 0, '27.png', 1),
-(28, 'Hy Vọng Mong Manh', 1, 158000, 'Nhà Xuất Bản Hà Nội', 'Shizukui Shusuke', 'Kiến trúc sư Kazuto và người vợ Kiyomi đang sống bình yên với cậu con trai Tadashi học lớp 10, và con gái Miyabi chuẩn bị lên cấp ba. Một chấn thương khi chơi bóng đá khiến Tadashi không thể tiếp tục theo đuổi đam mê, từ đó cậu chán chường, đôi lúc chơi bời qua đêm bên ngoài. Không ngờ, vào một tối cuối tuần trước khi kỳ nghỉ hè kết thúc, Tadashi ra khỏi nhà đi chơi như mọi khi và không quay về. Hai ngày sau, một xác chết là thiếu niên cấp ba được phát hiện – cậu bé bị đánh hội đồng và là bạn của Tadashi. Người ta được biết còn một nạn nhân nữa chưa tìm thấy. Vợ chồng Kazuto đã trải qua đủ loại cung bậc cảm xúc. Họ hy vọng vào sự thực nào đây: đứa con trai duy nhất là nạn nhân hay hung thủ? Dù là trường hợp nào cũng đều quá cay đắng và nghiệt ngã.', 0, '28.png', 1),
-(29, 'Tâm Lý Học Nói Gì Về Nỗi Đau?', 2, 86000, 'Nhà Xuất Bản Thế Giới', 'Richard Gross', 'Tâm lý học nói gì về nỗi đau?” là một cuốn sách nhân văn phân tích những phản ứng đa dạng của chúng ta khi mất đi một người thân yêu, cũng như đi sâu tìm hiểu cách các nhà tâm lý học giải thích về trải nghiệm này. Cuốn sách cũng khảo nghiệm các tập quán văn hóa - xã hội vốn đang định khung hoặc hạn chế hiểu biết về quá trình đau buồn, từ bộ môn phân tâm học tiên phong của Sigmund Freud cho tới quan niệm đã bị phủ nhận về các \"giai đoạn\" của nỗi đau. Ai trong đời cũng phải trải qua nỗi đau mất người thân, và “Tâm lý học nói gì về nỗi đau?” sẽ giúp bạn hiểu thêm về cảm xúc đau buồn đi cùng trải nghiệm ấy, của cả bản thân lẫn những người khác.', 0, '29.png', 1),
-(30, 'Thế Giới Không Có Người Xấu', 2, 89000, 'Nhà Xuất Bản Dân Trí', 'Whon Jaehun', 'Gửi đến bạn, người vẫn thường cảm thấy tổn thương, cô đơn và mỏi mệt, hãy mở cuốn sách này ra để đón nhận sự an ủi, vỗ về và tìm thấy những phút giây khiến trái tim bạn hạnh phúc. “Thế giới không có người xấu” là cuốn sách gói gọn những tâm tình chưa thể giãi bày từ tác giả muốn gửi đến bạn đọc, đồng thời thể hiện cái nhìn sâu sắc của ông về cuộc đời. Bằng những trải nghiệm thực tế của bản thân, ông cho rằng giống như mọi căn bệnh đều có nguyên do, thực ra trên thế giới này vốn không có người xấu, chỉ là vẫn luôn có những điều bạn chưa biết mà thôi. Bạn hãy thử thay đổi góc nhìn của chính mình, sống bình thản hơn, tập biết ơn những điều nhỏ bé và tích cực lấp đầy cuộc sống bằng những khoảnh khắc tươi sáng nhất. Hy vọng cuốn sách này có thể giúp bạn vững tin bước đi trên hành trình cuộc đời nhiều chông gai.', 0, '30.png', 1),
+(25, 'Những Nỗi Sợ Sâu Thẳm', 4, 109000, 'Nhà Xuất Bản Hà Nội', 'Fran Krause', 'Ai trong chúng ta cũng có những nỗi ám ảnh. Họa sĩ truyện tranh Fran Krause đã dùng ý tưởng của bản thân và thu thập chia sẻ của độc giả khắp thế giới để tạo nên Deep dark fears - một tuyển tập minh họa những nỗi sợ sâu kín của con người - từng làm mưa làm gió trên mạng. Bạn sẽ tìm thấy trong tuyển tập này những nỗi sợ quen thuộc như nhìn thấy ma trong gương phòng ngủ, bị hút vào thang cuốn ở trung tâm thương mại,… cho đến những nỗi sợ kỳ quặc như sợ kiến làm tổ trong đầu khi ngậm kẹo mút đi ngủ, sợ tự tháo tung chính mình khi nhổ một sợi tóc, sợ thức giấc và nhận ra mình chỉ là một chú chó,… Và cả những nỗi sợ hài hước kiểu như: “Đôi khi trong lúc đi ị, tôi sợ rằng đấy chỉ là MỘT GIẤC MƠ. Và thực tế là tôi đang ị đùn ở đâu đó.” Nét minh họa sống động của Fran Krause cùng những tình huống rùng rợn trong mỗi trang sách sẽ dẫn bạn đi từ phen hú hồn này đến pha thót tim khác, và không ngừng kích thích óc tưởng tượng của bạn. Chúc bạn có những trải-nghiệm-để-đời với NHỮNG NỖI SỢ SÂU THẲM!', 0, '25.png', 0),
+(26, 'Đời Nhẹ Khôn Kham', 4, 129000, 'Nhà Xuất Bản Hội Nhà Văn', 'Milan Kundera', 'Trong Đời nhẹ khôn kham, sự biến mất cái tôi cá nhân không phải do máy móc kỹ thuật mà do nhà nước chuyên chế. Nhân vật Jan Prochazka và giáo sư Vaclav Cerny chơi thân với nhau, nhưng họ không thể ngờ rằng tất cả cuộc trò chuyện trong bàn tiệc đều được bí mật ghi âm lại. Vào năm 1970 hay 1971, muốn làm mất uy tín của Prochazka, cảnh sát cho phát những cuộc nói chuyện ấy trên đài phát thanh.', 0, '26.png', 0),
+(27, 'Bụi Sao', 1, 119000, 'Nhà Xuất Bản Hà Nội', 'Neil Gaiman', 'Đến tuổi cập kê, Tristran Thorn đem lòng si mê một thiếu nữ xinh đẹp trong ngôi làng Bức Tường nơi anh lớn lên. Vì lời hứa sẽ cùng cô sánh vai trong thánh đường, chàng trai trẻ khăn gói lên đường tiến vào Xứ Tiên để tìm một ngôi sao băng từ trên trời rơi xuống. Chuyến phiêu lưu ở xứ sở kỳ lạ, rùng rợn mà đầy nhiệm màu đã xoay chuyển con người và thế giới quan của Tristran theo những cách anh chưa từng ngờ đến, biến anh thành một người hùng chân chính trong câu chuyện của mình. Cổ quái và nhân văn, đen tối và giàu cảm xúc, Bụi sao đem đến vô khối những câu chuyện chưa kể đằng sau cuộc hành trình tầm mộng của một vị anh hùng trẻ tuổi, cốt để chứng tỏ rằng chuyện thần tiên thực chất cũng dành cho người lớn.', 0, '27.png', 0),
+(28, 'Hy Vọng Mong Manh', 1, 158000, 'Nhà Xuất Bản Hà Nội', 'Shizukui Shusuke', 'Kiến trúc sư Kazuto và người vợ Kiyomi đang sống bình yên với cậu con trai Tadashi học lớp 10, và con gái Miyabi chuẩn bị lên cấp ba. Một chấn thương khi chơi bóng đá khiến Tadashi không thể tiếp tục theo đuổi đam mê, từ đó cậu chán chường, đôi lúc chơi bời qua đêm bên ngoài. Không ngờ, vào một tối cuối tuần trước khi kỳ nghỉ hè kết thúc, Tadashi ra khỏi nhà đi chơi như mọi khi và không quay về. Hai ngày sau, một xác chết là thiếu niên cấp ba được phát hiện – cậu bé bị đánh hội đồng và là bạn của Tadashi. Người ta được biết còn một nạn nhân nữa chưa tìm thấy. Vợ chồng Kazuto đã trải qua đủ loại cung bậc cảm xúc. Họ hy vọng vào sự thực nào đây: đứa con trai duy nhất là nạn nhân hay hung thủ? Dù là trường hợp nào cũng đều quá cay đắng và nghiệt ngã.', 0, '28.png', 0),
+(29, 'Tâm Lý Học Nói Gì Về Nỗi Đau?', 2, 86000, 'Nhà Xuất Bản Thế Giới', 'Richard Gross', 'Tâm lý học nói gì về nỗi đau?” là một cuốn sách nhân văn phân tích những phản ứng đa dạng của chúng ta khi mất đi một người thân yêu, cũng như đi sâu tìm hiểu cách các nhà tâm lý học giải thích về trải nghiệm này. Cuốn sách cũng khảo nghiệm các tập quán văn hóa - xã hội vốn đang định khung hoặc hạn chế hiểu biết về quá trình đau buồn, từ bộ môn phân tâm học tiên phong của Sigmund Freud cho tới quan niệm đã bị phủ nhận về các \"giai đoạn\" của nỗi đau. Ai trong đời cũng phải trải qua nỗi đau mất người thân, và “Tâm lý học nói gì về nỗi đau?” sẽ giúp bạn hiểu thêm về cảm xúc đau buồn đi cùng trải nghiệm ấy, của cả bản thân lẫn những người khác.', 0, '29.png', 0),
+(30, 'Thế Giới Không Có Người Xấu', 2, 89000, 'Nhà Xuất Bản Dân Trí', 'Whon Jaehun', 'Gửi đến bạn, người vẫn thường cảm thấy tổn thương, cô đơn và mỏi mệt, hãy mở cuốn sách này ra để đón nhận sự an ủi, vỗ về và tìm thấy những phút giây khiến trái tim bạn hạnh phúc. “Thế giới không có người xấu” là cuốn sách gói gọn những tâm tình chưa thể giãi bày từ tác giả muốn gửi đến bạn đọc, đồng thời thể hiện cái nhìn sâu sắc của ông về cuộc đời. Bằng những trải nghiệm thực tế của bản thân, ông cho rằng giống như mọi căn bệnh đều có nguyên do, thực ra trên thế giới này vốn không có người xấu, chỉ là vẫn luôn có những điều bạn chưa biết mà thôi. Bạn hãy thử thay đổi góc nhìn của chính mình, sống bình thản hơn, tập biết ơn những điều nhỏ bé và tích cực lấp đầy cuộc sống bằng những khoảnh khắc tươi sáng nhất. Hy vọng cuốn sách này có thể giúp bạn vững tin bước đi trên hành trình cuộc đời nhiều chông gai.', 0, '30.png', 0),
 (31, 'Hiểu Tâm Lý Rành Tâm Ý', 2, 123000, 'Nhà Xuất Bản Phụ Nữ', 'Huy Đức', 'Hiểu tâm lý rành tâm ý đánh dấu cột mốc quay trở lại của cây bút gây tiếng vang “Tại sao em ít nói thế?” - Huy Đức sau 3 năm vắng bóng. Tại đây, Huy Đức lí giải mọi thứ dưới góc nhìn tâm lý học, lột trần mọi điều bạn đang thực sự sợ hãi trong tình yêu, từ đó giúp bạn đối mặt và đón nhận một con người mới hơn của chính mình. Bạn có cơ hội mở rộng thế giới nội tâm dưới nhiều chiều khác nhau để tìm được bản chất của tình yêu mà mình đang thực sự tìm kiếm. Để hiểu rằng muốn có được hạnh phúc thì phải tranh đấu. Hơn cả, yêu là sự kết nối của cảm xúc, nhưng bạn cũng cần tỉnh táo và lý trí để giúp tình yêu luôn lành mạnh và rực rỡ sắc màu.', 1, '31.png ', 0),
 (32, 'Tâm Lý Học Tính Cách', 2, 109000, 'Nhà Xuất Bản Phụ Nữ', 'Trâu Hoàng Minh', '“Tâm lý học tính cách” lấy “chín kiểu hình tính cách” làm trọng tâm, với nền tảng là những lý luận của tâm lý học tính cách và tâm lý học chiều sâu , giới thiệu đến bạn đọc một cách chi tiết về đặc trưng và phương pháp cải thiện khuyết điểm dành cho chín kiểu hình tính cách của con người. Với ngôn từ dễ hiểu, ví dụ sinh động cùng nội dung chi tiết mang tính xác thực cao, tôi tin rằng cuốn sách này không chỉ giúp bạn đọc nhận thức được kiểu hình tính cách của bản thân, mà quan trọng hơn là giúp các bạn phát huy sở trường, đồng thời khắc phục khiếm khuyết của chính mình.', 0, '32.png', 0),
 (33, 'Bí Ẩn Sun Down', 3, 155000, 'Nhà Xuất Bản Thanh Niên', 'Simone ST. James', 'Năm 1982, Viv Delaney - một cô gái 20 tuổi - bị mất tích tại nhà nghỉ Sundown đúng vào lúc trên sóng truyền hình đang đưa tin về những vụ án mạng mà nạn nhân là những cô gái trẻ, những người được tìm thấy trong trạng thái không mảnh vải che thân. Vụ mất tích của Viv chìm vào quên lãng do không có một manh mối gì, cũng như những người trong gia đình cô bày tỏ một sự thờ ơ đến kì lạ và có chút gì đó chấp nhận. Năm 2017, cháu của Viv là Carly, khi ấy cũng là một cô gái 20 tuổi, không chấp nhận sự mất tích của bác mình lại chìm vào quên lãng như vậy, quyết định lên đường đến nhà nghỉ Sundown để giải mã bí mật. Tại đây, cô đã gặp những hiện tượng hết sức kì lạ và từng bước lần theo đó để giải mã bí ẩn này.', 0, '33.png ', 0),

@@ -3,21 +3,29 @@ require 'DataProvider.php';
 session_start();
 ?>
 <?php
-if (isset($_POST['name'])){
-    if (isset($_SESSION['cart'])){
-        echo '
-        <script>
-            alert("Giỏ hàng rỗng!!!");
-        </script>
-        ';
+if (isset($_POST['diachi'])&&isset($_POST['sodienthoai'])&&isset($_POST['thanhtoan'])){
+    $sql = "SELECT MAX(madonhang) AS max_madonhang FROM donhang";
+    $result =  executeQuery($sql);
+    $id = 1;
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $id = $row["max_madonhang"]+1;
     }
-    else {
-    $sql = "SELECT COUNT(*) AS numrows FROM sach";
-    $result =  mysqli_query($sql);
-    $id = mysqli_num_rows($result);
-    $sql = "INSERT INTO `donhang`(`madonhang`, `ngay`, `tendangnhap`, `diachi`, `trangthai`, `sodienthoai`) VALUES 
-    ('" . $id . "','" . $_POST[''] . "','" . $_POST['name'] . "','". $_POST['diachi'] ."','0','". $_POST['sodienthoai'] ."')";
+// Kiểm tra kết quả truy vấn
+    $sql = "INSERT INTO `donhang`(`madonhang`, `ngay`, `tendangnhap`, `diachi`, `daduyet`, `sodienthoai`, `thanhtoan`) VALUES 
+    ('" . $id . "','" . date('Y-m-d') . "','" . $_SESSION['user'] . "','". $_POST['diachi'] ."','0','". $_POST['sodienthoai'] ."','". $_POST['thanhtoan'] ."')";
+    executeQuery($sql);
+    if (isset($_SESSION['cart'])){
+        $cart = $_SESSION['cart'];
+        foreach ($cart as $book_id => $quantity) {
+            $sql = "INSERT INTO `chitietdonhang`(`madonhang`, `masach`, `soluong`) VALUES ('"
+                .$id."','".$book_id."','".$quantity."')";
+            executeQuery($sql);
+            $sql = "UPDATE `sach` SET `daduocban`='1' WHERE `masach` = '".$book_id."'";
+            executeQuery($sql);  
+        }
 }
+unset($_SESSION['cart']);
 }
 ?>
 
@@ -119,7 +127,7 @@ else {
                 </div>
             </div>
         </div>
-        <div class="products">
+        <div class="products" id="cart_list">
 
 
 <?php
@@ -202,8 +210,16 @@ if (isset($_SESSION['cart'])){
                     <h5></h5>
                 </div>
                 <div class="col-3 d-flex justify-content-end">
-                    <button id="pay_button" class="btn btn-primary rounded-pill mb-2 mb-lg-0 btn-pay" data-bs-toggle="modal" data-bs-target="#myModal-pay">
-                        <span class="d-flex align-items-center">
+<?php
+if (isset($_SESSION['user'])&&!empty($_SESSION['cart'])) {
+    echo '<button id="pay_button" class="btn btn-primary rounded-pill mb-2 mb-lg-0 btn-pay" data-bs-toggle="modal" data-bs-target="#myModal-pay">';
+}
+else {
+    echo '<button id="pay_button" class="btn btn-primary rounded-pill mb-2 mb-lg-0 btn-pay">';
+}              
+                        
+?>      
+                    <span class="d-flex align-items-center">
                             <i class="ri-money-dollar-box-fill"></i>
                             <span>Thanh toán</span>
                         </span>
@@ -269,11 +285,26 @@ if (isset($_SESSION['cart'])){
         
                 <!-- Modal body -->
                 <div class="modal-body" id="modal-pay">
-                <form method="POST">
+                
+<?php
+$sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_SESSION['user']."'";
+$result = executeQuery($sql);
+$row = $result -> fetch_array();
+    echo '
             <div class="row">
-                <label for="inputImg" class="col-sm-3 col-form-label">Tên khách hàng:</label>
+                <h5>Tên đăng nhập : '.$row['tendangnhap'].'</h5>
+            </div>
+            <div class="row">
+                <h5>Địa chỉ email : '.$row['email'].'</h5>
+            </div>
+            <hr>
+    ';
+?>
+<form method="POST">
+            <div class="row">
+                <label for="inputImg" class="col-sm-3 col-form-label">Địa chỉ giao hàng:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="customer-name" name="name">
+                    <input type="text" class="form-control" id="customer-name" name="diachi">
                 </div>
             </div>
             <div class="row">
@@ -282,29 +313,25 @@ if (isset($_SESSION['cart'])){
                     <input type="number" class="form-control" id="phone-number" name="sodienthoai">
                 </div>
             </div>
-            <div class="form-check" id = "address">
-                <h3 for="inputImg" class="col-form-label" name="diachi">Địa chỉ giao hàng:</h3>
-                <input type="text" size="40">
-                <br>
-            </div>
             <div class="form-check">
                 <h3 for="inputImg" class="col-form-label">Phương thức thanh toán:</h3>
-                <input name="t" class="form-check-input" type="radio" id="gridRadios1">
+                <input name="thanhtoan" class="form-check-input" type="radio" id="gridRadios1" value="Online">
                 <label class="form-check-label" for="gridRadios1">
                     Online
                 </label>
                 <br>
-                <input name="t" class="form-check-input" type="radio" id="gridRadios1">
+                <input name="thanhtoan" class="form-check-input" type="radio" id="gridRadios1" value="OCD">
                 <label class="form-check-label" for="gridRadios1">
                     OCD
                 </label>
             </div>
-        </form>
+       
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger confirm-button" data-bs-dismiss="modal">Xác nhận</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -364,6 +391,13 @@ if (isset($_SESSION['cart'])){
                 total.innerText = t+".000đ"
             })
         }
+        let cartList = document.getElementById("cart_list");
+        payButton.addEventListener('click',function(){
+            if (cartList.innerHTML=='\n\n\n        ')  {  
+                alert("Đơn hàng rỗng!!!");
+                location.reload();
+            }
+        })
     </script>
 </body>
 </html>

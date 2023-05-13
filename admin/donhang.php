@@ -232,14 +232,50 @@ $sql = "SELECT * FROM `donhang`";
 $result = executeQuery($sql);
 while ($row = $result -> fetch_array()){
 echo '
-<div class="modal" id="myModal_edit_'.$row["madonhang"].'" style="margin-top: 5%;">
+<div class="modal" id="myModal_edit_'.$row["madonhang"].'" style="margin-top: 2%;">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2>Chi tiết đơn hàng : '.$row["madonhang"].'</h2>
+                            <h2 style="color:pink;">Chi tiết đơn hàng : '.$row["madonhang"].'</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <!-- Modal body -->
+                        <div class="row">
+                            <div class="col-1">
+                                </div>
+                            <div class="col-4">
+                            <h5>Tên đăng nhập : '.$row["tendangnhap"].'</h5>
+                            </div>
+                        </div>  
+                        <div class="row">
+                        <div class="col-1">
+                                </div>
+                            <div class="col-4">
+                            <h5>Số điện thoại : '.$row["sodienthoai"].'</h5>
+                            </div>
+                        </div> 
+                        <div class="row">
+                        <div class="col-1">
+                                </div>
+                            <div class="col-10">
+                            <h5>Địa chỉ giao hàng : '.$row["diachi"].'</h5>
+                            </div>
+                        </div> 
+                        <div class="row">
+                        <div class="col-1">
+                                </div>
+                            <div class="col-10">
+                            <h5>Ngày đặt : '.$row["ngay"].'</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-1">
+                                </div>
+                            <div class="col-10">
+                            <h5>Hình thức thanh toán : '.$row["thanhtoan"].'</h5>
+                            </div>
+                        </div>        
+                        <hr>
                         <div class="row">
                             <div class="col-1">
                             </div>
