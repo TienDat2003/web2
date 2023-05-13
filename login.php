@@ -24,9 +24,21 @@ require 'DataProvider.php';
 <!-- Đăng ký -->
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
-    $passWord = md5($_POST['password']);
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `bikhoa`,`vaitro`) VALUES ('" . $_POST['name'] . "','" . $passWord . "','" . $_POST['email'] . "','0','nguoidung')";
-    $result = executeQuery($sql);
+    $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['name']."";
+    if (!($result -> fetch_array())){
+        $passWord = md5($_POST['password']);
+        $sql = "INSERT INTO `nguoidung`(`tendangnhap`, `matkhau`, `email`, `bikhoa`,`vaitro`) VALUES ('" . $_POST['name'] . "','" . $passWord . "','" . $_POST['email'] . "','0','nguoidung')";
+        $result = executeQuery($sql);
+    }
+    else
+    {
+        echo "
+    <script>
+        alert('Tên đăng nhập đã tồn tại')
+    </script>
+    ";
+        header("Location: register.php");
+    }
 }
 // Kết nối tới cơ sở dữ liệu (thay đổi thông tin kết nối tương ứng với hệ thống của bạn)
 

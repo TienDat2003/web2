@@ -25,8 +25,21 @@ if (isset($_POST['tendangnhap']))
 
 if (isset($_POST['tendangnhap1']))
 {   
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . md5($_POST['password1']) . "',0,'" . $_POST['vaitro'] . "')";
-    executeQuery($sql);
+    $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['name']."";
+    if (!($result -> fetch_array())){
+        $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . md5($_POST['password1']) . "',0,'" . $_POST['vaitro'] . "')";
+        executeQuery($sql);
+        header("Location: customer.php");
+    }
+    else
+    {
+        echo "
+    <script>
+        alert('Tên đăng nhập đã tồn tại')
+    </script>
+    ";
+        
+    }
     header("Location: customer.php");
 }
 $username="admin";
