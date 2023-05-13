@@ -6,7 +6,7 @@ if (isset($_GET['khoa']))
 {   
     $sql = "UPDATE `nguoidung` SET `bikhoa`='1' WHERE `tendangnhap`='".$_GET['khoa']."'";
     executeQuery($sql);
-    header("Location: customer.php");
+    // header("Location: customer.php");
 }
 if (isset($_GET['bokhoa']))
 {   
@@ -25,7 +25,7 @@ if (isset($_POST['tendangnhap']))
 
 if (isset($_POST['tendangnhap1']))
 {   
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','0','" . $_POST['vaitro'] . "')";
+    $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . md5($_POST['password1']) . "',0,'" . $_POST['vaitro'] . "')";
     executeQuery($sql);
     header("Location: customer.php");
 }
@@ -152,7 +152,7 @@ while ($row = $result -> fetch_array())
         if ($row['bikhoa']==0)
             echo '<a href="./customer.php?khoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Khóa</button></a>';
         else 
-            echo '<a href="./customer.php?bokhoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Mở</button></a>';          
+            echo '<a href="./customer.php?bokhoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-secondary btn-delete">Mở</button></a>';          
     }
         echo '
                     </div>
