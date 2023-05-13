@@ -295,7 +295,7 @@ $row = $result -> fetch_array();
                 <h5>Tên đăng nhập : '.$row['tendangnhap'].'</h5>
             </div>
             <div class="row">
-                <h5>Địa chỉ email : '.$row['email'].'</h5>
+                <h5 style="color:pink;">Email : '.$row['email'].'</h5>
             </div>
             <hr>
     ';
