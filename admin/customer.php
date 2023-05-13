@@ -17,17 +17,30 @@ if (isset($_GET['bokhoa']))
 
 if (isset($_POST['tendangnhap']))
 {   
-    $sql = "UPDATE `nguoidung` SET `tendangnhap`='" . $_POST['tendangnhapmoi'] . "
-    ', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" . $_POST['tendangnhap'] . "'";
-    executeQuery($sql);
-    header("Location: customer.php");
+    $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['tendangnhapmoi']."'";
+    $result = executeQuery($sql);
+    if (!($result -> fetch_array())){
+        $sql = "UPDATE `nguoidung` SET `tendangnhap`='" . $_POST['tendangnhapmoi'] . "
+        ', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" .$_POST['tendangnhap']. "'";
+        executeQuery($sql);
+        header("Location: customer.php");
+    }
+    else{
+        echo "
+    <script>
+        alert('Tên đăng nhập đã tồn tại')
+    </script>
+
+    ";
+    }
 }
 
 if (isset($_POST['tendangnhap1']))
 {   
-    $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['name']."";
+    $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['tendangnhap1']."";
+    $result = executeQuery($sql);
     if (!($result -> fetch_array())){
-        $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . md5($_POST['password1']) . "',0,'" . $_POST['vaitro'] . "')";
+        $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" .$_POST['tendangnhap1']. "','" . $_POST['email1'] . "','" . md5($_POST['password1']) . "',0,'" . $_POST['vaitro'] . "')";
         executeQuery($sql);
         header("Location: customer.php");
     }
