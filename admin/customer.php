@@ -25,7 +25,7 @@ if (isset($_POST['tendangnhap']))
 
 if (isset($_POST['tendangnhap1']))
 {   
-    $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','0','" . $_POST['vaitro'] . ")";
+    $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" . $_POST['tendangnhap1'] . "','" . $_POST['email1'] . "','" . $_POST['password1'] . "','0','" . $_POST['vaitro'] . "')";
     executeQuery($sql);
     header("Location: customer.php");
 }
@@ -267,7 +267,7 @@ while ($row = $result -> fetch_array()) {
         </div>
     <!-- <script src="./customer.js"></script> -->
     <script>
-    funtion validateForm(){
+    function validateForm(){
             let username = document.getElementById("inputName1");
             let email = document.getElementById("inputEmail1");
             let password = document.getElementById("inputPassword1");
