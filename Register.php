@@ -1,6 +1,4 @@
 
-<?php
-echo '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +27,7 @@ echo '
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form action="login.php" method="post" onsubmit="return validateForm()">
+            <form action="login.php" method="POST" onsubmit="return validateForm()">
                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                 <p class="lead fw-normal mb-0 me-3">Đăng nhập với</p>
                 <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -98,28 +96,25 @@ echo '
         </div>
     </section>
     <script>
-    funtion validateForm(){
-            let username = document.getElementById("nameinput");
-            let email = document.getElementById("form3Example3");
-            let password = document.getElementById("form3Example4");
-            let repassword = document.getElementById("form3Example4d");
+    function validateForm(){
+            var username = document.getElementById("nameinput");
+            var email = document.getElementById("form3Example3");
+            var password = document.getElementById("form3Example4");
+            var repassword = document.getElementById("form3Example4d");
             if (!username.value || !email.value || !password.value || !repassword.value) {
                 alert("Vui lòng nhập đầy đủ thông tin");
                 return false;
-            } else {
-                if (email.value.indexOf("@gmail.com")==-1) {
-                    alert("Email không hợp lệ")
-                    return false;
-                }
-                else {
-                if (password.value != repassword.value) {
-                    alert("Mật khẩu không khớp");
-                    return false;
-                }
-        }
+            }
+            if (email.value.indexOf("@gmail.com")==-1) {
+                alert("Email không hợp lệ")
+                return false;
+            }
+            if (password.value != repassword.value) {
+                alert("Mật khẩu không khớp");
+                return false;
+            }
         return true;
-    }
+}
     </script>
 </body>
-</html>';
-?>
+</html>

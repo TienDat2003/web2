@@ -300,11 +300,11 @@ $row = $result -> fetch_array();
             <hr>
     ';
 ?>
-<form method="POST">
+<form method="POST" onsubmit="return validateForm()">
             <div class="row">
                 <label for="inputImg" class="col-sm-3 col-form-label">Địa chỉ giao hàng:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="customer-name" name="diachi">
+                    <input type="text" class="form-control" id="address" name="diachi">
                 </div>
             </div>
             <div class="row">
@@ -338,6 +338,24 @@ $row = $result -> fetch_array();
     <!-- <script src="./js/main.js"></script> -->
     <!-- <script src="./js/cart.js"></script> -->
     <script>
+        function validateForm(){
+            var address = document.getElementById("address");
+            var phone = document.getElementById("phone-number");
+            var radios = document.getElementsByName('thanhtoan');
+            var isChecked = false;
+            for (var i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) {
+                isChecked = true;
+                break;
+            }
+            }
+
+            if (!address.value || !phone.value || isChecked) {
+                alert("Vui lòng nhập đầy đủ thông tin");
+                return false;
+            }
+        return true;
+}
         let minus = document.querySelectorAll(".minus")
         let plus = document.querySelectorAll(".plus")
         for (let i=0;i<minus.length;i++)
