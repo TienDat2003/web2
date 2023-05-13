@@ -212,9 +212,9 @@ while ($row = $result -> fetch_array())
             echo '<button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row["masach"] .'">Sửa</button>&nbsp';
             if ($row["daduocban"]==1){
                 if ($row["bian"]==0)
-                    echo '<a href="./productList.php?an='. $row["masach"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Ẩn</button></a>';
+                    echo '<a href="./productList.php?an='. $row["masach"] .'"><button type="button" class="btn btn-outline-primary btn-delete">Ẩn</button></a>';
                 if ($row["bian"]==1)
-                    echo '<a href="./productList.php?boan='. $row["masach"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Bỏ ẩn</button></a>';
+                    echo '<a href="./productList.php?boan='. $row["masach"] .'"><button type="button" class="btn btn-outline-dark btn-delete">Bỏ ẩn</button></a>';
                 }
             else
                 echo '<button type="button" class="btn btn-outline-danger btn-delete" data-bs-toggle="modal" data-bs-target="#myModal-delete'. $row["masach"] .'">Xóa</button>';

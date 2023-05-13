@@ -148,7 +148,7 @@ while ($row = $result -> fetch_array())
         <div class="col-2" style="text-align:center;">
         <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row['tendangnhap'] .'">Sửa</button>&nbsp
                     ';
-    if ($_SESSION['user']!=$row['tendangnhap']) {
+    if ($_SESSION['user']!=$row['tendangnhap']&&isset($_SESSION['user'])) {
         if ($row['bikhoa']==0)
             echo '<a href="./customer.php?khoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Khóa</button></a>';
         else 
@@ -190,13 +190,13 @@ while ($row = $result -> fetch_array()) {
                             <div class="row mb-3">
                                 <label for="inputName" class="col-sm-3 col-form-label">Tên đăng nhập:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="tendangnhapmoi" id="inputName" value="'. $row['tendangnhap'] .'">
+                                    <input type="text" class="form-control" name="tendangnhapmoi" id="inputName" value="'. $row['tendangnhap'].'">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="inputParValue" class="col-sm-3 col-form-label">Email:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="email" id="inputParValue"  value="'. $row['email'] .'">
+                                    <input type="text" class="form-control" name="email" id="inputParValue"  value="'.$row['email'].'">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" id="btn-confirm">Lưu thay đổi</button>
