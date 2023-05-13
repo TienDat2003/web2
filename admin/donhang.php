@@ -74,7 +74,7 @@ if (isset($_SESSION['user'])) {
                 </div>
             </div>
             
-            <div class="box container-fluid py-5" style="width:1250px;text-align: center; border-collapse: separate; border-radius: 15px;">
+            <div class="col py-3" style="text-align: center; border-collapse: separate; border-radius: 15px;">
             <div class="row">
                     <div class="col-6">
                         <h3 style="text-align: left;">Lọc đơn hàng: </h3>
