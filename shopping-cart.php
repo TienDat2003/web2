@@ -302,8 +302,8 @@ $row = $result -> fetch_array();
 ?>
 <form method="POST" onsubmit="return validateForm()">
             <div class="row">
-                <label for="inputImg" class="col-sm-3 col-form-label">Địa chỉ giao hàng:</label>
-                <div class="col-sm-9">
+                <label for="address" class="col-sm-3 col-form-label">Địa chỉ giao hàng:</label>
+                <div class="col-sm-7">
 <?php
 $sql = "SELECT * FROM donhang WHERE tendangnhap = '".$_SESSION['user']."'";
 $result = executeQuery($sql);
@@ -313,15 +313,25 @@ else
     echo '<input type="text" class="form-control" id="address" name="diachi">';
 ?>    
                 </div>
+                <label for="address" class="col-sm-2 col-form-label" style="color:blue;font-size:12px;">Thay đổi</label>
             </div>
             <div class="row">
-                <label for="inputImg" class="col-sm-3 col-form-label">Số điện thoại:</label>
-                <div class="col-sm-9">
-                    <input type="number" class="form-control" id="phone-number" name="sodienthoai">
+                <label for="phone-number" class="col-sm-3 col-form-label">Số điện thoại:</label>
+                <div class="col-sm-7">
+<?php
+$sql = "SELECT * FROM donhang WHERE tendangnhap = '".$_SESSION['user']."'";
+$result = executeQuery($sql);
+if ($row = $result -> fetch_array())
+    echo '<input type="number" class="form-control" id="phone-number" name="sodienthoai" value="'.$row['sodienthoai'].'">';
+else
+    echo '<input type="number" class="form-control" id="phone-number" name="sodienthoai">';
+?> 
+                   
                 </div>
+                <label for="phone-number" class="col-sm-2 col-form-label" style="color:blue;font-size:12px;">Thay đổi</label>
             </div>
             <div class="form-check">
-                <h3 for="inputImg" class="col-form-label">Phương thức thanh toán:</h3>
+                <h3 for="" class="col-form-label">Phương thức thanh toán:</h3>
                 <input name="thanhtoan" class="form-check-input" type="radio" id="gridRadios1" value="Online">
                 <label class="form-check-label" for="gridRadios1">
                     Online
