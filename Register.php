@@ -1,3 +1,12 @@
+<?php
+    if (isset($_GET['tontai']))
+        echo '
+        <script>
+            alert("Tên đăng nhập đã tồn tại")
+        </script>
+        '
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">

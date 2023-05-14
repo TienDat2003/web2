@@ -20,7 +20,7 @@ if (isset($_POST['tendangnhap']))
     $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['tendangnhapmoi']."'";
     $result = executeQuery($sql);
     if (!($result -> fetch_array())){
-        $sql = "UPDATE `nguoidung` SET `tendangnhap`='" . $_POST['tendangnhapmoi'] . "
+        $sql = "UPDATE `nguoidung` SET `tendangnhap`='" .$_POST['tendangnhapmoi']."
         ', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" .$_POST['tendangnhap']. "'";
         executeQuery($sql);
         header("Location: customer.php");
@@ -30,14 +30,13 @@ if (isset($_POST['tendangnhap']))
     <script>
         alert('Tên đăng nhập đã tồn tại')
     </script>
-
     ";
     }
 }
 
 if (isset($_POST['tendangnhap1']))
 {   
-    $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['tendangnhap1']."";
+    $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['tendangnhap1']."'";
     $result = executeQuery($sql);
     if (!($result -> fetch_array())){
         $sql = "INSERT INTO `nguoidung`(`tendangnhap`,`email`, `matkhau`,  `bikhoa`,`vaitro`) VALUES ('" .$_POST['tendangnhap1']. "','" . $_POST['email1'] . "','" . md5($_POST['password1']) . "',0,'" . $_POST['vaitro'] . "')";
@@ -51,9 +50,7 @@ if (isset($_POST['tendangnhap1']))
         alert('Tên đăng nhập đã tồn tại')
     </script>
     ";
-        
     }
-    header("Location: customer.php");
 }
 $username="admin";
 if (isset($_SESSION['user'])) {
@@ -174,7 +171,7 @@ while ($row = $result -> fetch_array())
         <div class="col-2" style="text-align:center;">
         <button type="button" class="btn btn-outline-success btn-edit" data-bs-toggle="modal" data-bs-target="#myModal_edit_'. $row['tendangnhap'] .'">Sửa</button>&nbsp
                     ';
-    if ($_SESSION['user']!=$row['tendangnhap']&&isset($_SESSION['user'])) {
+    if ($_SESSION['user']!=$row['tendangnhap']) {
         if ($row['bikhoa']==0)
             echo '<a href="./customer.php?khoa='. $row["tendangnhap"] .'"><button type="button" class="btn btn-outline-danger btn-delete">Khóa</button></a>';
         else 
@@ -186,7 +183,6 @@ while ($row = $result -> fetch_array())
                 <hr>
     ';
    }
-// :))))))))))))))))))))))))))))))))))))))))))))))))))
 ?>
 
 </div>
