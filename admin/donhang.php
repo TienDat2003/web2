@@ -177,9 +177,9 @@ $fromDate = $_POST['tungay'];
 $toDate = $_POST['denngay'];
 // Câu truy vấn SQL để lọc đơn hàng theo khoảng thời gian giao hàng
 if ($_POST['denngay']!=""&&$_POST['tungay']!="")
-    $sql .= "AND ngay >= '$fromDate' AND ngay <= '$toDate'";
+    $sql.= " AND ngay >= '$fromDate' AND ngay <= '$toDate'";
 if ($_POST['diachi']!='0')
-    $sql .= " AND `diachi` LIKE '%" . $_POST['diachi'] . "%'";
+    $sql.= " AND `diachi` LIKE '%" . $_POST['diachi'] . "%'";
 }
 $result = executeQuery($sql);
 while ($row = $result -> fetch_array()){
