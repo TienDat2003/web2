@@ -21,8 +21,10 @@ if (isset($_POST['tendangnhap']))
         $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['tendangnhapmoi']."'";
         $result = executeQuery($sql);
         if (!($result -> fetch_array())){
-            $sql = "UPDATE `nguoidung` SET `tendangnhap`='" .$_POST['tendangnhapmoi']."
-            ', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" .$_POST['tendangnhap']. "'";
+            $sql = "UPDATE `nguoidung`
+        SET `tendangnhap`='" . $_POST['tendangnhapmoi'] . "',
+            `email`='" . $_POST['email'] . "'
+        WHERE `tendangnhap`='" . $_POST['tendangnhap'] . "'";
             executeQuery($sql);
             header("Location: customer.php");
         }
