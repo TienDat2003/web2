@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2023 at 02:48 AM
+-- Generation Time: May 14, 2023 at 08:29 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -87,10 +87,10 @@ CREATE TABLE `donhang` (
 --
 
 INSERT INTO `donhang` (`madonhang`, `ngay`, `tendangnhap`, `diachi`, `daduyet`, `sodienthoai`, `thanhtoan`) VALUES
-(1, '2023-05-02', 'HoangD', '112 Lý Thường Kiệt,P11,Quận 3, TP Hồ Chí Minh, Việt Nam, Trái Đất, Hệ Mặt Trời, Thiên hà Milky Way', 1, '0928493274', 'OCD'),
-(2, '2023-05-15', 'NguyenA', '112 Lý Thường Kiệt,P12,Quận Gò Vấp, TP Hồ Chí Minh, Việt Nam, Trái Đất, Hệ Mặt Trời, Thiên hà Milky ', 1, '0928493274', 'Online'),
-(3, '2100-06-15', 'TranB', '37 Lý Thái Tổ,P3,Quận 1, TP Hồ Chí Minh, Việt Nam, Trái Đất, Hệ Mặt Trời, Thiên hà Milky Way', 0, '09284563', 'Online'),
-(4, '2023-02-11', 'VoE', 'Nhà của E, Quận 2, TP Hồ Chí Minh, Việt Nam, Trái Đất, Hệ Mặt Trời, Thiên hà Milky Way', 0, '074893274', 'Online');
+(1, '2023-05-02', 'HoangD', '112 Lý Thường Kiệt,P11,Quận 3, TP Hồ Chí Minh, Việt Nam', 1, '0928493274', 'OCD'),
+(2, '2023-05-15', 'NguyenA', '112 Lý Thường Kiệt,P12,Quận Gò Vấp, TP Hồ Chí Minh, Việt Nam', 1, '0928493274', 'Online'),
+(3, '2100-06-15', 'TranB', '37 Lý Thái Tổ,P3,Quận 1, TP Hồ Chí Minh, Việt Nam', 0, '09284563', 'Online'),
+(4, '2023-02-11', 'VoE', 'Nhà của E, Quận 2, TP Hồ Chí Minh, Việt Nam', 0, '074893274', 'Online');
 
 -- --------------------------------------------------------
 
@@ -132,12 +132,12 @@ CREATE TABLE `nguoidung` (
 --
 
 INSERT INTO `nguoidung` (`tendangnhap`, `matkhau`, `email`, `bikhoa`, `vaitro`) VALUES
-('adminDepGai', '202cb962ac59075b964b07152d234b70', 'tai02@gmail.com', 0, 'quantrivien'),
+('adminDepGai1', '202cb962ac59075b964b07152d234b70', 'tai02@gmail.com', 0, 'quantrivien'),
 ('adminXinhTrai', '202cb962ac59075b964b07152d234b70', 'admin@gmail.com', 0, 'quantrivien'),
 ('HoangD', '9cbf8a4dcb8e30682b927f352d6559a0', 'Dhoang4@gmail.com', 0, 'nguoidung'),
-('LeC', '1e0fe8c5d5f63c7409ef02c7073edaf2', 'Cle3@gmail.com', 0, 'nguoidung'),
+('LeC', '1e0fe8c5d5f63c7409ef02c7073edaf2', 'leC02@gmail.com', 0, 'nguoidung'),
 ('NguyenA', '0b3364569955a095cd07ba6bad26091d', 'Anguyen1@gmail.com', 0, 'nguoidung'),
-('TranB', '7545271e2af0f6172c78579bcb8b3127', 'Btran2@gmail.com', 0, 'nguoidung'),
+('TranB', '7545271e2af0f6172c78579bcb8b3127', 'Btran21@gmail.com', 0, 'nguoidung'),
 ('VoE', '5e8fd2e51fd2d8550f98aaf43e511f71', 'Evo5@gmail.com', 0, 'nguoidung');
 
 -- --------------------------------------------------------
@@ -257,7 +257,7 @@ ALTER TABLE `chitietdonhang`
 -- Constraints for table `donhang`
 --
 ALTER TABLE `donhang`
-  ADD CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`tendangnhap`) REFERENCES `nguoidung` (`tendangnhap`);
+  ADD CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`tendangnhap`) REFERENCES `nguoidung` (`tendangnhap`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sach`

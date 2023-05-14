@@ -298,7 +298,6 @@ while ($row = $result -> fetch_array()) {
             </div>
         </div>
         </div>
-    <!-- <script src="./customer.js"></script> -->
     <script>
     function validateForm(){
             let username = document.getElementById("inputName1");

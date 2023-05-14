@@ -352,8 +352,6 @@ else
             </div>
         </div>
     </div>
-    <!-- <script src="./js/main.js"></script> -->
-    <!-- <script src="./js/cart.js"></script> -->
     <script>
         function validateForm(){
             var address = document.getElementById("address");
@@ -418,8 +416,10 @@ else
         for (let i=0;i<deleteBtn.length;i++)
         {
             deleteBtn[i].addEventListener('click',function(){
+                total = document.getElementById("total-price")
                 document.getElementById("cart-child-"+i).innerHTML="";
                 let sumcart = document.getElementsByClassName("sum_cart")
+                let t=0;
                 for (let i=0;i<sumcart.length;i++)
                     t = t + parseInt(sumcart[i].innerText)
                 total.innerText = t+".000đ"

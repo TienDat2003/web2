@@ -509,7 +509,6 @@ echo '
               </div>
         </div>
     </footer>
-    <!--  <script src="./js/main.js"></script>-->
     <script>
     let carts = document.querySelectorAll('.add-cart')
     for (let i = 0; i < carts.length; i++) {

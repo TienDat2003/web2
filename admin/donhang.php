@@ -350,6 +350,5 @@ echo '
                     </div>
                 </div>
              </div>
-    <script src="./donhang.js"></script>
 </body>
 </html>
