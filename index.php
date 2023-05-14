@@ -152,7 +152,7 @@ while ($row = $result -> fetch_array())
         echo '<a href="./index.php?theloai='. $row['tenloai'] . '" class="list-group-item"> '. $row['tenloai'] . '</a>';
    }
   echo '
-                    </div>
+                    </div></div>
                 <div class="d-flex justify-content-center row" id="card-list">
                     <h2 class="text-center mt-3 pt-3" id="list-item-1">Danh sách sản phẩm</h2> ';
 $per_page = 9;//số lượng sản phẩm 1 trangx

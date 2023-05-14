@@ -62,7 +62,7 @@ if (isset($_SESSION['user'])) {
                         </li>
                         <li class="nav-item">
                             <a href="./customer.php" class="px-0 align-middle">
-                                <i class="ri-file-user-line"></i> <span class="ms-1 d-none d-sm-inline">Khách hàng</span> </a>
+                                <i class="ri-file-user-line"></i> <span class="ms-1 d-none d-sm-inline">Quản lí tài khoản</span> </a>
                         </li>
                     </ul>
                     <hr>
