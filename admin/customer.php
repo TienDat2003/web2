@@ -17,22 +17,31 @@ if (isset($_GET['bokhoa']))
 
 if (isset($_POST['tendangnhap']))
 {   
-    $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['tendangnhapmoi']."'";
-    $result = executeQuery($sql);
-    if (!($result -> fetch_array())){
-        $sql = "UPDATE `nguoidung` SET `tendangnhap`='" .$_POST['tendangnhapmoi']."
-        ', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" .$_POST['tendangnhap']. "'";
-        executeQuery($sql);
-        header("Location: customer.php");
-    }
-    else{
-        echo "
-    <script>
-        alert('Tên đăng nhập đã tồn tại')
-    </script>
-    ";
+    if ($_POST['tendangnhap']!=$_POST['tendangnhapmoi']){
+        $sql = "SELECT * FROM nguoidung WHERE tendangnhap = '".$_POST['tendangnhapmoi']."'";
+        $result = executeQuery($sql);
+        if (!($result -> fetch_array())){
+            $sql = "UPDATE `nguoidung` SET `tendangnhap`='" .$_POST['tendangnhapmoi']."
+            ', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" .$_POST['tendangnhap']. "'";
+            executeQuery($sql);
+            header("Location: customer.php");
+        }
+        else{
+            echo "
+        <script>
+            alert('Tên đăng nhập đã tồn tại')
+        </script>
+        ";
     }
 }
+    else {
+        $sql = "UPDATE `nguoidung` SET `tendangnhap`='" .$_POST['tendangnhapmoi']."
+            ', `email`='" . $_POST['email'] . "' WHERE `tendangnhap`='" .$_POST['tendangnhap']. "'";
+            executeQuery($sql);
+            header("Location: customer.php");
+    }
+}
+
 
 if (isset($_POST['tendangnhap1']))
 {   
